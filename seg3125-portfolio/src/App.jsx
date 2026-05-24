@@ -55,7 +55,7 @@ function App() {
               <h1 className="display-2 fw-bold mb-4">Hi, I&apos;m Jaïme D. Tapa</h1>
               <p className="lead hero-copy mb-4">
                 I am a second-year Software Engineering student building clean, user-focused
-                digital experiences that are simple, organized, and easy to use.
+                digital experiences that are simple, organized and easy to use.
               </p>
               <a href="#projects" className="btn btn-primary btn-lg fw-bold">View My Work</a>
             </div>
@@ -71,8 +71,8 @@ function App() {
               <h2 className="fw-bold mb-3">About Me</h2>
               <p className="fs-5 lh-lg text-secondary">
                 I am a second-year Software Engineering student at the University of Ottawa
-                with an interest in web development, programming, and user interface design.
-                I have gained experience through a few projects and co-op placements, and I
+                with an interest in web development, programming and user interface design.
+                I have gained experience through a few projects and co-op placements and I
                 want to learn more about cybersecurity.
               </p>
             </div>
@@ -103,8 +103,8 @@ function App() {
               <p className="fs-5 lh-lg text-white-50">
                 My process is guided by user-centered design. I start by understanding
                 user needs and the goal of the interface, then organize content clearly,
-                build functional layouts, and refine the experience through hierarchy,
-                spacing, and feedback.
+                build functional layouts and refine the experience through hierarchy,
+                spacing and feedback.
               </p>
             </div>
           </div>
