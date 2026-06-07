@@ -47,7 +47,6 @@ function Footer() {
 
       <div className="footer-bottom">
         <span>Designed by Jaïme Tapa</span>
-        <span>SEG 3125 Assignment 2</span>
         <span>© 2026 Meridian Health Physiotherapy</span>
       </div>
     </footer>
