@@ -3,6 +3,7 @@ import teamImageTwo from '../../assets/team/physiotherapy-doctor-assisting-elder
 import teamImageThree from '../../assets/team/amara-johnson.jpg'
 import './Team.css'
 
+// Therapist profile data used to render the team cards.
 const therapists = [
   {
     name: 'Dr. Sarah Wilson',
@@ -42,6 +43,7 @@ function Team() {
         </h2>
       </div>
       <div className="team-grid">
+        {/* Build one profile card for each therapist. */}
         {therapists.map((therapist) => (
           <article className="team-card" key={therapist.name}>
             <ImageFrame

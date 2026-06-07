@@ -41,25 +41,20 @@
   text-decoration: none;
 }
 
-.contact-media {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.contact-media .placeholder,
-.contact-media .image-frame {
-  min-height: 390px;
+.contact-map {
+  width: 100%;
+  min-height: 600px;
+  border: 0;
+  border-radius: 24px;
+  box-shadow: 0 14px 32px rgba(13, 78, 166, 0.08);
 }
 
 @media (max-width: 1040px) {
   .contact-layout {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 760px) {
-  .contact-media {
-    grid-template-columns: 1fr;
+  .contact-map {
+    min-height: 460px;
   }
 }

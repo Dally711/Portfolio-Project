@@ -4,6 +4,7 @@ import postSurgeryImage from '../../assets/images/patient-doing-physical-rehabil
 import postureImage from '../../assets/images/physiotherapy-concept-full-shot_23-2149047502.jpg'
 import './Services.css'
 
+// Service card content is kept in one array so prices and images are easy to edit.
 const services = [
   {
     title: 'Back Pain Treatment',
@@ -46,6 +47,7 @@ function Services() {
       </div>
       <div className="service-showcase">
         <div className="service-list">
+          {/* Build one service card for each item in the services array. */}
           {services.map((service) => (
             <article
               className={`service-card ${

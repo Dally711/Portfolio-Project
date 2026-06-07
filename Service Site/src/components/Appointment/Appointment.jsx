@@ -27,13 +27,14 @@ const therapists = [
   'Amara Johnson',
 ]
 
+// Keeps every form input controlled by React state.
 const initialBooking = {
   firstName: '',
   lastName: '',
   email: '',
   phone: '',
-  service: services[0].name,
-  therapist: therapists[0],
+  service: '',
+  therapist: '',
   date: '',
   time: '',
   isFirstAppointment: false,
@@ -59,10 +60,13 @@ function ImageFrame({ src, alt }) {
 function Appointment() {
   const [booking, setBooking] = useState(initialBooking)
   const [confirmation, setConfirmation] = useState(null)
+
+  // Finds the price that matches the selected service so it updates live.
   const selectedService = services.find(
     (service) => service.name === booking.service,
   )
 
+  // Handles text inputs, selects, textareas, and the checkbox from one function.
   const handleBookingChange = (event) => {
     const { checked, name, type, value } = event.target
     setBooking((current) => ({
@@ -71,12 +75,13 @@ function Appointment() {
     }))
   }
 
+  // Prevents a real form submission and shows a confirmation summary instead.
   const handleSubmit = (event) => {
     event.preventDefault()
     setConfirmation({
       name: `${booking.firstName} ${booking.lastName}`,
       service: booking.service,
-      price: selectedService.price,
+      price: selectedService?.price ?? 'Not selected',
       therapist: booking.therapist,
       date: booking.date,
       time: booking.time,
@@ -158,7 +163,9 @@ function Appointment() {
                 name="service"
                 value={booking.service}
                 onChange={handleBookingChange}
+                required
               >
+                <option value="">Select a service</option>
                 {services.map((service) => (
                   <option key={service.name}>{service.name}</option>
                 ))}
@@ -170,7 +177,9 @@ function Appointment() {
                 name="therapist"
                 value={booking.therapist}
                 onChange={handleBookingChange}
+                required
               >
+                <option value="">Select a therapist</option>
                 {therapists.map((therapist) => (
                   <option key={therapist}>{therapist}</option>
                 ))}
@@ -178,9 +187,10 @@ function Appointment() {
             </label>
           </div>
 
+          {/* Shows the current treatment price before the user submits. */}
           <div className="price-summary" aria-live="polite">
             <span>Selected treatment price</span>
-            <strong>{selectedService.price}</strong>
+            <strong>{selectedService ? selectedService.price : 'Select a service'}</strong>
           </div>
 
           <div className="form-row">
@@ -232,6 +242,7 @@ function Appointment() {
           </button>
         </form>
 
+        {/* Side panel keeps the support image and the generated booking summary. */}
         <aside className="booking-side">
           <ImageFrame
             src={rehabExerciseImage}

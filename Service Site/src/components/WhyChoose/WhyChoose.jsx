@@ -4,6 +4,7 @@ import physicalTherapyIcon from '../../assets/icons/physical-therapy.png'
 import progressIcon from '../../assets/icons/progress.png'
 import scheduleIcon from '../../assets/icons/schedule.png'
 
+// Steps shown in the "How It Works" process section.
 const processSteps = [
   {
     number: '01',
@@ -48,6 +49,7 @@ function WhyChoose() {
         </p>
       </div>
       <div className="process-grid">
+        {/* Each process card uses the same structure with different step content. */}
         {processSteps.map((step) => (
           <article className="process-card" key={step.number}>
             <div className="process-icon" aria-hidden="true">

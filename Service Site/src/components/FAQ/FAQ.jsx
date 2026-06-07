@@ -1,16 +1,37 @@
 import { useState } from 'react'
 import './FAQ.css'
 
+// FAQ content is stored as data so questions can be edited without changing markup.
 const faqs = [
+  {
+    question: 'Do you accept insurance?',
+    answer:
+      'Yes. Meridian provides receipts you can submit to your insurance provider. Coverage depends on your individual plan.',
+  },
+  {
+    question: 'Do I need a referral from a doctor to receive treatment?',
+    answer:
+      'No referral is required to book physiotherapy. Some insurance plans may ask for one before reimbursing you.',
+  },
+  {
+    question: 'How do I know which treatment option is right for me?',
+    answer:
+      'Your physiotherapist will assess your symptoms, movement, goals, and history before recommending the most appropriate treatment plan.',
+  },
+  {
+    question: 'Can I get a same-day appointment?',
+    answer:
+      'Same-day appointments may be available depending on the schedule. Use the booking form or call the clinic to check availability.',
+  },
   {
     question: 'What should I expect during my first visit?',
     answer:
       'Your first appointment includes a detailed assessment, movement testing, a discussion of your goals, and an initial treatment plan.',
   },
   {
-    question: "Do I need a doctor's referral?",
+    question: 'Can I receive multiple types of treatment during a single visit?',
     answer:
-      'No referral is required to book physiotherapy. Some insurance plans may request one for reimbursement, so it is worth checking your coverage.',
+      'Yes. Your session may include hands-on therapy, guided exercises, mobility work, and education depending on your needs.',
   },
   {
     question: 'How long is a physiotherapy session?',
@@ -22,21 +43,20 @@ const faqs = [
     answer:
       'Prices range from $80 for posture assessments to $120 for post-surgery recovery sessions. Service cards list the current appointment pricing.',
   },
+  {
+    question: 'What conditions do you treat?',
+    answer:
+      'Meridian treats back pain, sports injuries, post-surgery recovery, posture concerns, mobility limitations, and recurring stiffness.',
+  },
+  {
+    question: 'What types of services does Meridian Health Physiotherapy provide?',
+    answer:
+      'Services include back pain treatment, sports rehabilitation, post-surgery recovery, and posture assessments.',
+  },
 ]
 
-function Placeholder({ label, variant = 'image' }) {
-  return (
-    <div className={`placeholder placeholder-${variant}`} aria-label={label}>
-      <div className="placeholder-mark" aria-hidden="true">
-        <span></span>
-        <span></span>
-      </div>
-      <p>{label}</p>
-    </div>
-  )
-}
-
 function FAQ() {
+  // Tracks which FAQ item is currently expanded.
   const [openFaq, setOpenFaq] = useState(0)
 
   return (
@@ -48,6 +68,7 @@ function FAQ() {
         </h2>
       </div>
       <div className="faq-list">
+        {/* Render FAQ items and toggle the answer for the selected question. */}
         {faqs.map((faq, index) => {
           const isOpen = openFaq === index
           return (
@@ -58,7 +79,6 @@ function FAQ() {
                 onClick={() => setOpenFaq(isOpen ? null : index)}
                 aria-expanded={isOpen}
               >
-                <Placeholder label="Replace with FAQ icon" variant="icon" />
                 <span>{faq.question}</span>
                 <span className="faq-toggle">{isOpen ? '-' : '+'}</span>
               </button>
