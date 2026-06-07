@@ -1,12 +1,13 @@
 .feature-section {
   background: #f3f4f6;
+  padding-block: clamp(72px, 7vw, 108px);
 }
 
 .why-process-heading {
   display: grid;
   justify-items: center;
   max-width: 860px;
-  margin: 0 auto 74px;
+  margin: 0 auto 64px;
   text-align: center;
 }
 
@@ -15,7 +16,7 @@
   background: transparent;
   border: 0;
   box-shadow: none;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
 }
 
@@ -31,23 +32,23 @@
 
 .why-process-heading h2 {
   color: var(--ink);
-  font-size: clamp(3rem, 5.5vw, 5.7rem);
+  font-size: clamp(2.4rem, 4.2vw, 4.4rem);
   line-height: 0.95;
   text-transform: none;
 }
 
 .why-process-heading > p:last-child {
-  max-width: 780px;
-  margin: 28px 0 0;
+  max-width: 710px;
+  margin: 24px 0 0;
   color: #606975;
-  font-size: clamp(1.05rem, 1.5vw, 1.32rem);
+  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
   line-height: 1.55;
 }
 
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 44px;
+  gap: 36px;
   margin-top: 0;
 }
 
@@ -57,16 +58,16 @@
   grid-template-columns: 1fr;
   align-content: start;
   justify-items: center;
-  gap: 20px;
-  padding: 0 12px 104px;
+  gap: 17px;
+  padding: 0 10px 82px;
   border: 0;
   text-align: center;
 }
 
 .process-icon {
   display: grid;
-  width: 112px;
-  height: 112px;
+  width: 94px;
+  height: 94px;
   place-items: center;
   color: var(--primary-blue);
   background: var(--white);
@@ -76,15 +77,15 @@
 }
 
 .process-icon img {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
 .process-line {
   position: relative;
   width: 100%;
-  height: 34px;
+  height: 28px;
 }
 
 .process-line::before {
@@ -103,8 +104,8 @@
   left: 50%;
   top: 50%;
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   margin: 0;
   padding: 0;
   background: var(--primary-blue);
@@ -121,16 +122,16 @@
   max-width: 280px;
   margin: 0;
   color: #101827;
-  font-size: clamp(1.25rem, 1.75vw, 1.7rem);
+  font-size: clamp(1.08rem, 1.35vw, 1.38rem);
   line-height: 1.1;
   text-transform: none;
 }
 
 .process-card p {
-  max-width: 330px;
+  max-width: 300px;
   margin: 0 auto;
   color: #4d5663;
-  font-size: 1.05rem;
+  font-size: 0.96rem;
   line-height: 1.55;
 }
 
@@ -138,8 +139,8 @@
   position: absolute;
   left: 50%;
   bottom: 0;
-  color: rgba(13, 78, 166, 0.14);
-  font-size: clamp(4rem, 7vw, 6.2rem);
+  color: rgba(13, 78, 166, 0.11);
+  font-size: clamp(3.3rem, 5.8vw, 5rem);
   font-weight: 900;
   line-height: 0.8;
   transform: translateX(-50%);
