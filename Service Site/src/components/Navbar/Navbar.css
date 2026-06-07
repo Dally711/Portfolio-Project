@@ -56,24 +56,116 @@
   color: var(--accent-lime);
 }
 
+.menu-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  
+  gap: 5px;
+  padding: 10px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+}
+
 @media (max-width: 1040px) {
   .navbar {
-    align-items: flex-start;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: nowrap;
   }
 
   .navbar nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    justify-content: stretch;
+    justify-items: center;
+    max-height: 0;
+    gap: 0;
+    padding: 0 clamp(22px, 6vw, 88px);
+    overflow: hidden;
+    background: var(--primary-blue);
+    box-shadow: 0 18px 28px rgba(13, 78, 166, 0.18);
+    transition:
+      max-height 180ms ease,
+      padding 180ms ease;
+  }
+
+  .navbar nav.is-open {
+    max-height: 360px;
+    padding-block: 16px 22px;
+  }
+
+  .navbar nav a {
+    width: 100%;
+    justify-self: stretch;
+    padding: 13px 0;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: grid;
+    order: 2;
+  }
+
+  .navbar .button-small {
     order: 3;
-    flex-basis: 100%;
-    justify-content: flex-start;
-    padding-bottom: 2px;
-    overflow-x: auto;
   }
 }
 
 @media (max-width: 760px) {
   .navbar {
-    gap: 16px;
-    padding-block: 18px;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  .brand img {
+    width: clamp(170px, 46vw, 230px);
+    max-height: 62px;
+  }
+
+  .navbar .button-small {
+    min-height: 46px;
+    padding-inline: 14px 6px;
+    font-size: 0.9rem;
+  }
+
+  .navbar nav {
+    padding-inline: 22px;
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    justify-content: flex-start;
+  }
+
+  .navbar .button-small {
+    margin-left: auto;
+  }
+
+  .navbar .button-text {
+    display: none;
+  }
+
+  .brand img {
+    width: clamp(155px, 42vw, 190px);
   }
 }
