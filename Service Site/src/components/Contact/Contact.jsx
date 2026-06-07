@@ -34,7 +34,11 @@ function Contact() {
           </p>
           <div className="hours">
             <strong>Hours</strong>
-            <span>Monday-Friday: 8:00 AM - 7:00 PM</span>
+            <span>Monday: 8:00 AM - 7:00 PM</span>
+            <span>Tuesday: 8:00 AM - 7:00 PM</span>
+            <span>Wednesday: 8:00 AM - 7:00 PM</span>
+            <span>Thursday: 8:00 AM - 8:00 PM</span>
+            <span>Friday: 8:00 AM - 7:00 PM</span>
             <span>Saturday: 9:00 AM - 3:00 PM</span>
             <span>Sunday: Closed</span>
           </div>
