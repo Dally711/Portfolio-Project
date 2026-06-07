@@ -1,54 +1,53 @@
 .feature-section {
   background: #f3f4f6;
-  padding-block: clamp(72px, 7vw, 108px);
+  padding-block: clamp(82px, 7.5vw, 118px);
 }
 
 .why-process-heading {
   display: grid;
   justify-items: center;
   max-width: 860px;
-  margin: 0 auto 64px;
+  margin: 0 auto 72px;
   text-align: center;
 }
 
 .why-process-heading .eyebrow {
-  color: #5f6672;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  color: var(--primary-blue);
+  background: var(--white);
+  border: 2px solid rgba(13, 78, 166, 0.22);
+  box-shadow: 0 8px 18px rgba(13, 78, 166, 0.08);
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
 }
 
 .why-process-heading .eyebrow::before {
-  width: auto;
-  height: auto;
-  margin-right: 8px;
-  color: var(--primary-blue);
-  background: transparent;
-  border-radius: 0;
-  content: "★";
+  width: 8px;
+  height: 8px;
+  margin-right: 9px;
+  background: var(--accent-lime);
+  border-radius: 999px;
+  content: "";
 }
 
 .why-process-heading h2 {
   color: var(--ink);
-  font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+  font-size: clamp(2.75rem, 4.8vw, 5rem);
   line-height: 0.95;
   text-transform: none;
 }
 
 .why-process-heading > p:last-child {
-  max-width: 710px;
+  max-width: 780px;
   margin: 24px 0 0;
   color: #606975;
-  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
   line-height: 1.55;
 }
 
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 36px;
+  gap: 40px;
   margin-top: 0;
 }
 
@@ -58,16 +57,16 @@
   grid-template-columns: 1fr;
   align-content: start;
   justify-items: center;
-  gap: 17px;
-  padding: 0 10px 82px;
+  gap: 19px;
+  padding: 0 12px 92px;
   border: 0;
   text-align: center;
 }
 
 .process-icon {
   display: grid;
-  width: 94px;
-  height: 94px;
+  width: 104px;
+  height: 104px;
   place-items: center;
   color: var(--primary-blue);
   background: var(--white);
@@ -77,15 +76,15 @@
 }
 
 .process-icon img {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
 }
 
 .process-line {
   position: relative;
   width: 100%;
-  height: 28px;
+  height: 32px;
 }
 
 .process-line::before {
@@ -104,8 +103,8 @@
   left: 50%;
   top: 50%;
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   margin: 0;
   padding: 0;
   background: var(--primary-blue);
@@ -122,16 +121,16 @@
   max-width: 280px;
   margin: 0;
   color: #101827;
-  font-size: clamp(1.08rem, 1.35vw, 1.38rem);
+  font-size: clamp(1.2rem, 1.55vw, 1.55rem);
   line-height: 1.1;
   text-transform: none;
 }
 
 .process-card p {
-  max-width: 300px;
+  max-width: 330px;
   margin: 0 auto;
   color: #4d5663;
-  font-size: 0.96rem;
+  font-size: 1.05rem;
   line-height: 1.55;
 }
 
@@ -140,7 +139,7 @@
   left: 50%;
   bottom: 0;
   color: rgba(13, 78, 166, 0.11);
-  font-size: clamp(3.3rem, 5.8vw, 5rem);
+  font-size: clamp(3.75rem, 6.4vw, 5.6rem);
   font-weight: 900;
   line-height: 0.8;
   transform: translateX(-50%);
@@ -161,5 +160,4 @@
   .process-line {
     max-width: 320px;
   }
-
 }

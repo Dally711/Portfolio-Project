@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  min-height: clamp(620px, 78vh, 860px);
+  min-height: calc(100vh - 104px);
   margin: 0;
   padding: clamp(96px, 13vw, 172px) clamp(22px, 8vw, 154px);
   place-items: center;
@@ -107,7 +107,7 @@
 
 @media (max-width: 760px) {
   .hero-section {
-    min-height: 680px;
+    min-height: calc(100vh - 160px);
     padding-inline: 22px;
   }
 }
