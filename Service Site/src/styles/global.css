@@ -197,6 +197,16 @@ em {
   line-height: 1;
 }
 
+.arrow-icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .placeholder {
   position: relative;
   display: grid;

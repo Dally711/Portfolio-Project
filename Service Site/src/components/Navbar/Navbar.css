@@ -9,7 +9,7 @@
   justify-content: space-between;
   gap: 28px;
   min-height: 78px;
-  padding: 18px clamp(22px, 6vw, 88px);
+  padding: 18px clamp(22px, 6vw, 88px) 18px clamp(12px, 3vw, 48px);
   background: var(--primary-blue);
   border-radius: 0;
   box-shadow: 0 12px 28px rgba(13, 78, 166, 0.16);

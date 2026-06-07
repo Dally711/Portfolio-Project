@@ -44,7 +44,10 @@ const initialBooking = {
 function ArrowIcon() {
   return (
     <span className="arrow-icon" aria-hidden="true">
-      -&gt;
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M5 12h14" />
+        <path d="m13 6 6 6-6 6" />
+      </svg>
     </span>
   )
 }
