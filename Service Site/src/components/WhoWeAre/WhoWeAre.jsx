@@ -4,7 +4,6 @@ import assessmentIcon from '../../assets/icons/assessment.png'
 import physicalTherapyIcon from '../../assets/icons/physical-therapy.png'
 import progressIcon from '../../assets/icons/progress.png'
 import mainClinicImage from '../../assets/images/woman-having-physiotherapy-session-clinic.jpg'
-import secondaryClinicImage from '../../assets/images/physiotherapist-helping-patient-her-clinic.jpg'
 
 const features = [
   {
@@ -43,9 +42,6 @@ function WhoWeAre() {
           <figure className="who-main-image">
             <img src={mainClinicImage} alt="Physiotherapist treating a patient in clinic" />
           </figure>
-          <figure className="who-small-image">
-            <img src={secondaryClinicImage} alt="Physiotherapist helping a patient with posture" />
-          </figure>
         </div>
 
         <div className="who-copy">
@@ -66,12 +62,12 @@ function WhoWeAre() {
             <ul>
               <li>3,500+ clients helped</li>
               <li>12,000+ appointments completed</li>
-              <li>4.9/5 patient satisfaction</li>
+              <li>4.9/5★ patient satisfaction</li>
             </ul>
           </div>
 
           <Link className="button who-button" to="/team">
-            Learn More About Us
+            Learn More About our Team
             <ArrowIcon />
           </Link>
         </div>
