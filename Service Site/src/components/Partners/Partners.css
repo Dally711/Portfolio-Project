@@ -1,0 +1,48 @@
+.partners-band {
+  display: grid;
+  gap: clamp(28px, 4vw, 44px);
+  padding: clamp(58px, 6vw, 86px) clamp(22px, 8vw, 154px);
+  background: var(--white);
+  text-align: center;
+}
+
+.partners-band p {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  font-weight: 800;
+}
+
+.partners-track {
+  gap: clamp(34px, 6vw, 88px);
+}
+
+.partner-logo {
+  width: clamp(130px, 15vw, 220px);
+  min-height: 86px;
+  margin: 0;
+  padding: 10px;
+  opacity: 1;
+  transition: transform 160ms ease;
+}
+
+.partner-logo img {
+  width: 100%;
+  max-height: 82px;
+  object-fit: contain;
+}
+
+.partner-logo-capsule img {
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 680px) {
+  .partners-track {
+    gap: 22px;
+  }
+
+  .partner-logo {
+    width: 42%;
+    min-height: 74px;
+  }
+}

@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
+import Partners from './components/Partners/Partners'
 import WhoWeAre from './components/WhoWeAre/WhoWeAre'
 import Services from './components/Services/Services'
 import WhyChoose from './components/WhyChoose/WhyChoose'
@@ -15,6 +16,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <Partners />
       <WhoWeAre />
       <WhyChoose />
       <Testimonials />
