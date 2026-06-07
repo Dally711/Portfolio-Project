@@ -1,0 +1,41 @@
+.book-now-section {
+  padding: clamp(72px, 7vw, 108px) clamp(22px, 8vw, 154px);
+  background: var(--light-background);
+}
+
+.book-now-panel {
+  display: grid;
+  justify-items: center;
+  max-width: 980px;
+  padding: clamp(42px, 6vw, 72px);
+  background: var(--white);
+  border: 1px solid #d8eaf0;
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(13, 78, 166, 0.08);
+}
+
+.book-now-panel h2 {
+  max-width: 760px;
+  color: var(--ink);
+  font-size: clamp(2.35rem, 4vw, 4.35rem);
+  line-height: 1;
+}
+
+.book-now-panel > p:not(.eyebrow) {
+  max-width: 660px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.book-now-button {
+  margin-top: 34px;
+}
+
+@media (max-width: 680px) {
+  .book-now-panel {
+    padding-inline: 24px;
+  }
+}

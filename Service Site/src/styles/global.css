@@ -107,6 +107,7 @@ em {
   border: 2px solid rgba(13, 78, 166, 0.22);
   border-radius: 999px;
   box-shadow: 0 8px 18px rgba(13, 78, 166, 0.08);
+  font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 900;
   letter-spacing: 0.12em;

@@ -31,7 +31,7 @@ function Partners() {
   return (
     <section className="partners-band container-fluid" aria-label="Our partners">
       <p>Trusted by our community partners</p>
-      <div className="partners-track d-flex align-items-center justify-content-center flex-wrap">
+      <div className="partners-track d-flex align-items-center justify-content-center">
         {partners.map((partner) => (
           <figure
             className={`partner-logo ${partner.className} d-flex align-items-center justify-content-center`}
