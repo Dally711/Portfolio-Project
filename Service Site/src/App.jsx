@@ -1,3 +1,4 @@
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import Services from './components/Services/Services'
@@ -9,18 +10,29 @@ import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <WhyChoose />
+      <Testimonials />
+    </>
+  )
+}
+
 function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Services />
-      <WhyChoose />
-      <Team />
-      <Appointment />
-      <FAQ />
-      <Testimonials />
-      <Contact />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/booking" element={<Appointment />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
       <Footer />
     </>
   )

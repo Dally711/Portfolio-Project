@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Footer.css'
 import footerBackground from '../../assets/images/woman-having-physiotherapy-session-clinic.jpg'
 import meridianLogo from '../../assets/logos/meridian-logo-white.png'
@@ -23,11 +24,11 @@ function Footer() {
 
         <nav className="footer-column d-grid" aria-label="Footer navigation">
           <strong>Quick Links</strong>
-          <a href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#team">Team</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
+          <Link to="/">Home</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/team">Team</Link>
+          <Link to="/faq">FAQ</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
 
         <div className="footer-column d-grid">
@@ -50,8 +51,8 @@ function Footer() {
       </div>
 
       <div className="footer-bottom d-flex flex-wrap justify-content-between">
-        <span>Designed by Ja&iuml;me Tapa</span>
-        <span>&copy; 2026 Meridian Health Physiotherapy</span>
+        <span>Designed by Jaïme Tapa</span>
+        <span>© 2026 Meridian Health Physiotherapy</span>
       </div>
     </footer>
   )

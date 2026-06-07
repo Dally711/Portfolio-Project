@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Hero.css'
 import heroImage from '../../assets/images/physiotherapist-helping-patient-her-clinic.jpg'
 
@@ -25,12 +26,12 @@ function Hero() {
           long-term mobility.
         </p>
         <div className="hero-actions d-flex flex-wrap justify-content-center">
-          <a className="btn button button-light" href="#booking">
+          <Link className="btn button button-light" to="/booking">
             Book Appointment <ArrowIcon />
-          </a>
-          <a className="btn button button-outline" href="#services">
+          </Link>
+          <Link className="btn button button-outline" to="/services">
             View Services <ArrowIcon />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

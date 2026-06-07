@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom'
 import meridianLogoWhite from '../../assets/logos/meridian-logo-white.png'
 import './Navbar.css'
 
@@ -12,19 +13,19 @@ function ArrowIcon() {
 function Navbar() {
   return (
     <header className="navbar navbar-expand-lg">
-      <a className="brand" href="#home" aria-label="Meridian home">
+      <Link className="brand" to="/" aria-label="Meridian home">
         <img src={meridianLogoWhite} alt="Meridian Health Physiotherapy" />
-      </a>
+      </Link>
       <nav className="navbar-nav" aria-label="Primary navigation">
-        <a className="nav-link" href="#home">Home</a>
-        <a className="nav-link" href="#services">Services</a>
-        <a className="nav-link" href="#team">Team</a>
-        <a className="nav-link" href="#faq">FAQ</a>
-        <a className="nav-link" href="#contact">Contact</a>
+        <NavLink className="nav-link" to="/" end>Home</NavLink>
+        <NavLink className="nav-link" to="/services">Services</NavLink>
+        <NavLink className="nav-link" to="/team">Team</NavLink>
+        <NavLink className="nav-link" to="/faq">FAQ</NavLink>
+        <NavLink className="nav-link" to="/contact">Contact</NavLink>
       </nav>
-      <a className="btn button button-small" href="#booking">
+      <Link className="btn button button-small" to="/booking">
         Book Appointment <ArrowIcon />
-      </a>
+      </Link>
     </header>
   )
 }

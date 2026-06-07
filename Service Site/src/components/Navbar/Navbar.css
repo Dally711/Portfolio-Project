@@ -51,7 +51,8 @@
 }
 
 .navbar nav a:hover,
-.navbar nav a:focus-visible {
+.navbar nav a:focus-visible,
+.navbar nav a.active {
   color: var(--accent-lime);
 }
 

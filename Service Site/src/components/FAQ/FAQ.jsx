@@ -69,12 +69,9 @@ function FAQ() {
           Questions? We're <em>happy to help.</em>
         </h2>
       </div>
-      <div className="faq-list row">
+      <div className="faq-list d-grid">
         {faqColumns.map((column, columnIndex) => (
-          <div
-            className="faq-column col-12 col-lg-6"
-            key={`faq-column-${columnIndex}`}
-          >
+          <div className="faq-column" key={`faq-column-${columnIndex}`}>
             {/* Render FAQ items and toggle the answer for the selected question. */}
             {column.map((faq, index) => {
               const faqIndex = columnIndex * middleIndex + index
