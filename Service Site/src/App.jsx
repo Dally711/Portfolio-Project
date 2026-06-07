@@ -16,9 +16,9 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Partners />
       <WhoWeAre />
       <WhyChoose />
+      <Partners />
       <Testimonials />
     </>
   )
