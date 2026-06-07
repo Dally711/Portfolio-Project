@@ -52,7 +52,7 @@ function ArrowIcon() {
 function ImageFrame({ src, alt }) {
   return (
     <figure className="image-frame">
-      <img src={src} alt={alt} />
+      <img className="img-fluid" src={src} alt={alt} />
     </figure>
   )
 }
@@ -90,8 +90,8 @@ function Appointment() {
   }
 
   return (
-    <section className="section booking-section" id="booking">
-      <div className="section-heading split-heading">
+    <section className="section booking-section container-fluid" id="booking">
+      <div className="section-heading split-heading d-grid">
         <div>
           <p className="eyebrow">Book Appointment</p>
           <h2>
@@ -104,8 +104,8 @@ function Appointment() {
         </p>
       </div>
 
-      <div className="booking-layout">
-        <form className="booking-form" onSubmit={handleSubmit}>
+      <div className="booking-layout d-grid">
+        <form className="booking-form d-grid" onSubmit={handleSubmit}>
           <div className="form-row">
             <label>
               First Name
@@ -115,6 +115,7 @@ function Appointment() {
                 onChange={handleBookingChange}
                 required
                 type="text"
+                className="form-control"
                 autoComplete="given-name"
               />
             </label>
@@ -126,6 +127,7 @@ function Appointment() {
                 onChange={handleBookingChange}
                 required
                 type="text"
+                className="form-control"
                 autoComplete="family-name"
               />
             </label>
@@ -140,6 +142,7 @@ function Appointment() {
                 onChange={handleBookingChange}
                 required
                 type="email"
+                className="form-control"
                 autoComplete="email"
               />
             </label>
@@ -151,6 +154,7 @@ function Appointment() {
                 onChange={handleBookingChange}
                 required
                 type="tel"
+                className="form-control"
                 autoComplete="tel"
               />
             </label>
@@ -164,6 +168,7 @@ function Appointment() {
                 value={booking.service}
                 onChange={handleBookingChange}
                 required
+                className="form-select"
               >
                 <option value="">Select a service</option>
                 {services.map((service) => (
@@ -178,6 +183,7 @@ function Appointment() {
                 value={booking.therapist}
                 onChange={handleBookingChange}
                 required
+                className="form-select"
               >
                 <option value="">Select a therapist</option>
                 {therapists.map((therapist) => (
@@ -188,7 +194,7 @@ function Appointment() {
           </div>
 
           {/* Shows the current treatment price before the user submits. */}
-          <div className="price-summary" aria-live="polite">
+          <div className="price-summary d-flex" aria-live="polite">
             <span>Selected treatment price</span>
             <strong>{selectedService ? selectedService.price : 'Select a service'}</strong>
           </div>
@@ -202,6 +208,7 @@ function Appointment() {
                 onChange={handleBookingChange}
                 required
                 type="date"
+                className="form-control"
               />
             </label>
             <label>
@@ -212,6 +219,7 @@ function Appointment() {
                 onChange={handleBookingChange}
                 required
                 type="time"
+                className="form-control"
               />
             </label>
           </div>
@@ -222,6 +230,7 @@ function Appointment() {
               checked={booking.isFirstAppointment}
               onChange={handleBookingChange}
               type="checkbox"
+              className="form-check-input"
             />
             <span>This is my first appointment at Meridian.</span>
           </label>
@@ -233,52 +242,59 @@ function Appointment() {
               value={booking.notes}
               onChange={handleBookingChange}
               rows="5"
+              className="form-control"
               placeholder="Tell us about your symptoms, goals, or access needs."
             ></textarea>
           </label>
 
-          <button className="button form-button" type="submit">
+          <button className="btn button form-button" type="submit">
             Submit Appointment Request <ArrowIcon />
           </button>
         </form>
 
         {/* Side panel keeps the support image and the generated booking summary. */}
-        <aside className="booking-side">
+        <aside className="booking-side d-grid">
           <ImageFrame
             src={rehabExerciseImage}
             alt="Patient doing rehabilitation exercises with therapist support"
           />
           {confirmation && (
-            <div className="confirmation-card" role="status">
-              <p className="eyebrow">Appointment Request Received</p>
-              <h3>Thank you, {confirmation.name}.</h3>
-              <dl>
-                <div>
-                  <dt>Service</dt>
-                  <dd>{confirmation.service}</dd>
-                </div>
-                <div>
-                  <dt>Price</dt>
-                  <dd>{confirmation.price}</dd>
-                </div>
-                <div>
-                  <dt>Therapist</dt>
-                  <dd>{confirmation.therapist}</dd>
-                </div>
-                <div>
-                  <dt>First Visit</dt>
-                  <dd>{confirmation.isFirstAppointment ? 'Yes' : 'No'}</dd>
-                </div>
-                <div>
-                  <dt>Date</dt>
-                  <dd>{confirmation.date}</dd>
-                </div>
-                <div>
-                  <dt>Time</dt>
-                  <dd>{confirmation.time}</dd>
-                </div>
-              </dl>
-            </div>
+            <>
+              <p className="text-success booking-success" role="status">
+                Success! Your appointment request has been submitted. Meridian
+                Health Physiotherapy will contact you to confirm the booking.
+              </p>
+              <div className="confirmation-card">
+                <p className="eyebrow">Appointment Request Received</p>
+                <h3>Thank you, {confirmation.name}.</h3>
+                <dl>
+                  <div>
+                    <dt>Service</dt>
+                    <dd>{confirmation.service}</dd>
+                  </div>
+                  <div>
+                    <dt>Price</dt>
+                    <dd>{confirmation.price}</dd>
+                  </div>
+                  <div>
+                    <dt>Therapist</dt>
+                    <dd>{confirmation.therapist}</dd>
+                  </div>
+                  <div>
+                    <dt>First Visit</dt>
+                    <dd>{confirmation.isFirstAppointment ? 'Yes' : 'No'}</dd>
+                  </div>
+                  <div>
+                    <dt>Date</dt>
+                    <dd>{confirmation.date}</dd>
+                  </div>
+                  <div>
+                    <dt>Time</dt>
+                    <dd>{confirmation.time}</dd>
+                  </div>
+                </dl>
+              </div>
+            </>
           )}
         </aside>
       </div>

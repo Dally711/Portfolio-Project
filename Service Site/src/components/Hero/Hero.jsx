@@ -24,11 +24,11 @@ function Hero() {
           Professional physiotherapy care for pain relief, injury recovery, and
           long-term mobility.
         </p>
-        <div className="hero-actions">
-          <a className="button button-light" href="#booking">
+        <div className="hero-actions d-flex flex-wrap justify-content-center">
+          <a className="btn button button-light" href="#booking">
             Book Appointment <ArrowIcon />
           </a>
-          <a className="button button-outline" href="#services">
+          <a className="btn button button-outline" href="#services">
             View Services <ArrowIcon />
           </a>
         </div>

@@ -38,8 +38,8 @@ const processSteps = [
 
 function WhyChoose() {
   return (
-    <section className="section feature-section">
-      <div className="why-process-heading">
+    <section className="section feature-section container-fluid">
+      <div className="why-process-heading text-center mx-auto">
         <p className="eyebrow">How It Works</p>
         <h2>Our working process</h2>
         <p>
@@ -48,10 +48,10 @@ function WhyChoose() {
           on lasting progress.
         </p>
       </div>
-      <div className="process-grid">
+      <div className="process-grid d-grid">
         {/* Each process card uses the same structure with different step content. */}
         {processSteps.map((step) => (
-          <article className="process-card" key={step.number}>
+          <article className="process-card h-100" key={step.number}>
             <div className="process-icon" aria-hidden="true">
               <img src={step.icon} alt="" />
             </div>

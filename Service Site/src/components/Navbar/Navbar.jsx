@@ -11,18 +11,18 @@ function ArrowIcon() {
 
 function Navbar() {
   return (
-    <header className="navbar">
+    <header className="navbar navbar-expand-lg">
       <a className="brand" href="#home" aria-label="Meridian home">
         <img src={meridianLogoWhite} alt="Meridian Health Physiotherapy" />
       </a>
-      <nav aria-label="Primary navigation">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+      <nav className="navbar-nav" aria-label="Primary navigation">
+        <a className="nav-link" href="#home">Home</a>
+        <a className="nav-link" href="#services">Services</a>
+        <a className="nav-link" href="#team">Team</a>
+        <a className="nav-link" href="#faq">FAQ</a>
+        <a className="nav-link" href="#contact">Contact</a>
       </nav>
-      <a className="button button-small" href="#booking">
+      <a className="btn button button-small" href="#booking">
         Book Appointment <ArrowIcon />
       </a>
     </header>

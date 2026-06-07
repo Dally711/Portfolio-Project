@@ -5,9 +5,14 @@
 .faq-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 42px;
+  gap: 42px;
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.faq-column {
+  display: grid;
+  align-content: start;
   padding: 30px;
   background: var(--white);
   border: 1px solid #d8eaf0;
@@ -68,6 +73,10 @@
 @media (max-width: 760px) {
   .faq-list {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .faq-column {
     padding: 18px;
   }
 

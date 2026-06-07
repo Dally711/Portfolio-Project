@@ -79,6 +79,11 @@
   min-height: 410px;
 }
 
+.booking-success {
+  margin: 0;
+  font-weight: 850;
+}
+
 .confirmation-card {
   padding: 28px;
   background: var(--white);

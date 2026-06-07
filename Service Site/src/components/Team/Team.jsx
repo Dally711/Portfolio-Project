@@ -28,24 +28,24 @@ const therapists = [
 function ImageFrame({ src, alt }) {
   return (
     <figure className="image-frame">
-      <img src={src} alt={alt} />
+      <img className="img-fluid" src={src} alt={alt} />
     </figure>
   )
 }
 
 function Team() {
   return (
-    <section className="section team-section" id="team">
-      <div className="center-heading">
+    <section className="section team-section container-fluid" id="team">
+      <div className="center-heading text-center mx-auto">
         <p className="eyebrow">Meet Our Team</p>
         <h2>
           Meet your physiotherapy <em>team.</em>
         </h2>
       </div>
-      <div className="team-grid">
+      <div className="team-grid d-grid">
         {/* Build one profile card for each therapist. */}
         {therapists.map((therapist) => (
-          <article className="team-card" key={therapist.name}>
+          <article className="team-card h-100" key={therapist.name}>
             <ImageFrame
               src={therapist.image}
               alt={`${therapist.name}, ${therapist.specialty}`}

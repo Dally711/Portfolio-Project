@@ -58,6 +58,8 @@ const faqs = [
 function FAQ() {
   // Tracks which FAQ item is currently expanded.
   const [openFaq, setOpenFaq] = useState(0)
+  const middleIndex = Math.ceil(faqs.length / 2)
+  const faqColumns = [faqs.slice(0, middleIndex), faqs.slice(middleIndex)]
 
   return (
     <section className="section faq-section" id="faq">
@@ -67,25 +69,34 @@ function FAQ() {
           Questions? We're <em>happy to help.</em>
         </h2>
       </div>
-      <div className="faq-list">
-        {/* Render FAQ items and toggle the answer for the selected question. */}
-        {faqs.map((faq, index) => {
-          const isOpen = openFaq === index
-          return (
-            <article className="faq-item" key={faq.question}>
-              <button
-                type="button"
-                className="faq-question"
-                onClick={() => setOpenFaq(isOpen ? null : index)}
-                aria-expanded={isOpen}
-              >
-                <span>{faq.question}</span>
-                <span className="faq-toggle">{isOpen ? '-' : '+'}</span>
-              </button>
-              {isOpen && <p className="faq-answer">{faq.answer}</p>}
-            </article>
-          )
-        })}
+      <div className="faq-list row">
+        {faqColumns.map((column, columnIndex) => (
+          <div
+            className="faq-column col-12 col-lg-6"
+            key={`faq-column-${columnIndex}`}
+          >
+            {/* Render FAQ items and toggle the answer for the selected question. */}
+            {column.map((faq, index) => {
+              const faqIndex = columnIndex * middleIndex + index
+              const isOpen = openFaq === faqIndex
+
+              return (
+                <article className="faq-item" key={faq.question}>
+                  <button
+                    type="button"
+                    className="faq-question"
+                    onClick={() => setOpenFaq(isOpen ? null : faqIndex)}
+                    aria-expanded={isOpen}
+                  >
+                    <span>{faq.question}</span>
+                    <span className="faq-toggle">{isOpen ? '-' : '+'}</span>
+                  </button>
+                  {isOpen && <p className="faq-answer">{faq.answer}</p>}
+                </article>
+              )
+            })}
+          </div>
+        ))}
       </div>
     </section>
   )

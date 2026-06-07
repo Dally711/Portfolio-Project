@@ -39,24 +39,28 @@ const services = [
 function Services() {
   return (
     <section className="section services-section" id="services">
-      <div className="center-heading">
+      <div className="center-heading text-center mx-auto">
         <p className="eyebrow">Services and Pricing</p>
         <h2>
           Restoring movement, <em>relieving pain.</em>
         </h2>
       </div>
-      <div className="service-showcase">
-        <div className="service-list">
+      <div className="service-showcase container-fluid px-0">
+        <div className="service-list row g-4">
           {/* Build one service card for each item in the services array. */}
           {services.map((service) => (
             <article
               className={`service-card ${
                 service.iconImage ? 'service-card-with-image' : ''
-              }`}
+              } col`}
               key={service.title}
             >
               <figure className="service-icon-image">
-                <img src={service.iconImage} alt={`${service.title} service`} />
+                <img
+                  className="img-fluid"
+                  src={service.iconImage}
+                  alt={`${service.title} service`}
+                />
               </figure>
               <div>
                 <h3>{service.title}</h3>
