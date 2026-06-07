@@ -1,0 +1,113 @@
+.hero-section.hero-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: clamp(620px, 78vh, 860px);
+  margin: 0;
+  padding: clamp(96px, 13vw, 172px) clamp(22px, 8vw, 154px);
+  place-items: center;
+  overflow: hidden;
+  background-image:
+    linear-gradient(90deg, rgba(5, 13, 25, 0.82), rgba(13, 78, 166, 0.42)),
+    linear-gradient(rgba(5, 13, 25, 0.56), rgba(5, 13, 25, 0.72)),
+    var(--hero-image);
+  background-position: center;
+  background-size: cover;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero-section::before {
+  display: none;
+}
+
+.hero-section .hero-copy {
+  display: grid;
+  justify-items: center;
+  place-self: center;
+  justify-self: center;
+  width: min(100%, 1080px);
+  max-width: 1080px;
+  margin-inline: auto;
+  color: var(--white);
+  text-align: center;
+}
+
+.hero-section .hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 0 28px;
+  padding: 12px 20px;
+  color: var(--white);
+  background: rgba(5, 13, 25, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  font-size: clamp(0.88rem, 1.2vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(8px);
+}
+
+.hero-section .hero-kicker::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  margin-right: 10px;
+  background: var(--accent-lime);
+  border-radius: 999px;
+}
+
+.hero-section .hero-copy h1 {
+  max-width: 920px;
+  margin-inline: auto;
+  color: var(--white);
+  font-size: clamp(3.6rem, 7.2vw, 7.2rem);
+  line-height: 0.98;
+  text-align: center;
+  text-transform: none;
+}
+
+.hero-section .hero-copy h1 span {
+  display: inline;
+  color: var(--accent-lime);
+}
+
+.hero-section .hero-subtitle {
+  max-width: 760px;
+  margin: 28px auto 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.14rem, 1.7vw, 1.45rem);
+  font-weight: 650;
+  text-align: center;
+}
+
+.hero-section .hero-actions {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 42px;
+}
+
+.hero-section .hero-actions .button-outline {
+  color: var(--primary-blue);
+  background: var(--white);
+  border-color: var(--white);
+}
+
+.hero-section .hero-actions .button-outline:hover,
+.hero-section .hero-actions .button-outline:focus-visible {
+  color: var(--white);
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+@media (max-width: 760px) {
+  .hero-section {
+    min-height: 680px;
+    padding-inline: 22px;
+  }
+}
