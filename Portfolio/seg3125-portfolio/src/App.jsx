@@ -1,6 +1,9 @@
 import { useRef } from 'react'
 import './App.css'
-import serviceSiteImage from './assets/physiotherapist-helping-patient-her-clinic.jpg'
+import analyticsImage from './assets/case studies/analytics.png'
+import ecommerceImage from './assets/case studies/ecommerce.png'
+import memoryGameImage from './assets/case studies/memory-game.jpeg'
+import serviceSiteImage from './assets/case studies/physiotherapist-helping-patient-her-clinic.jpg'
 import webDevelopmentIcon from './assets/web-development.svg'
 import workflowIcon from './assets/workflow.svg'
 
@@ -142,6 +145,11 @@ function App() {
 
             <div className="col-sm-6 col-lg-3">
               <div className="card project-card h-100 shadow-sm">
+                <img
+                  className="card-img-top project-card-image"
+                  src={memoryGameImage}
+                  alt="Memory game case study preview"
+                />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Memory Game</h3>
                   <p className="card-text text-secondary">A browser-based card game with interactive rounds.</p>
@@ -152,6 +160,11 @@ function App() {
 
             <div className="col-sm-6 col-lg-3">
               <div className="card project-card h-100 shadow-sm">
+                <img
+                  className="card-img-top project-card-image"
+                  src={ecommerceImage}
+                  alt="E-commerce site case study preview"
+                />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">E-commerce Site</h3>
                   <p className="card-text text-secondary">A shopping site with product listings and cart flow.</p>
@@ -162,6 +175,11 @@ function App() {
 
             <div className="col-sm-6 col-lg-3">
               <div className="card project-card h-100 shadow-sm">
+                <img
+                  className="card-img-top project-card-image"
+                  src={analyticsImage}
+                  alt="Analytics site case study preview"
+                />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Analytics Site</h3>
                   <p className="card-text text-secondary">A dashboard for viewing metrics and visual reports.</p>
