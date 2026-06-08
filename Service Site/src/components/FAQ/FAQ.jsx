@@ -78,7 +78,7 @@ function FAQ() {
               const isOpen = openFaq === faqIndex
 
               return (
-                <article className="faq-item" key={faq.question}>
+                <article className={`faq-item ${isOpen ? 'is-open' : ''}`} key={faq.question}>
                   <button
                     type="button"
                     className="faq-question"
@@ -88,7 +88,9 @@ function FAQ() {
                     <span>{faq.question}</span>
                     <span className="faq-toggle">{isOpen ? '-' : '+'}</span>
                   </button>
-                  {isOpen && <p className="faq-answer">{faq.answer}</p>}
+                  <div className="faq-answer-wrap" aria-hidden={!isOpen}>
+                    <p className="faq-answer">{faq.answer}</p>
+                  </div>
                 </article>
               )
             })}
