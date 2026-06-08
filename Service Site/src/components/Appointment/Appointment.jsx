@@ -23,8 +23,8 @@ const services = [
 
 const therapists = [
   'Dr. Sarah Wilson',
-  'Michael Chen',
-  'Amara Johnson',
+  'Gregory House',
+  'Meredith Grey',
 ]
 
 // Keeps every form input controlled by React state.
