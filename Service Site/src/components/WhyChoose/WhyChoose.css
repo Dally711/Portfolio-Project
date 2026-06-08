@@ -60,7 +60,35 @@
   gap: 19px;
   padding: 0 12px 92px;
   border: 0;
+  opacity: 0;
   text-align: center;
+  transform: translateX(-42px);
+}
+
+.process-card:nth-child(2) {
+  transform: translateX(-42px);
+}
+
+.process-card:nth-child(3) {
+  transform: translateX(42px);
+}
+
+.process-card:nth-child(4) {
+  transform: translateX(42px);
+}
+
+.feature-section.is-visible .process-card {
+  animation: process-from-left 760ms ease both;
+}
+
+.feature-section.is-visible .process-card:first-child,
+.feature-section.is-visible .process-card:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.feature-section.is-visible .process-card:nth-child(3),
+.feature-section.is-visible .process-card:nth-child(4) {
+  animation-name: process-from-right;
 }
 
 .process-icon {
@@ -143,6 +171,30 @@
   font-weight: 900;
   line-height: 0.8;
   transform: translateX(-50%);
+}
+
+@keyframes process-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-42px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes process-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(42px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 1180px) {

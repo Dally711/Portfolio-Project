@@ -4,6 +4,10 @@ import footerBackground from '../../assets/images/woman-having-physiotherapy-ses
 import meridianLogo from '../../assets/logos/meridian-logo-white.png'
 
 function Footer() {
+  const goToPageStart = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }
+
   return (
     <footer
       className="footer container-fluid"
@@ -24,11 +28,11 @@ function Footer() {
 
         <nav className="footer-column d-grid" aria-label="Footer navigation">
           <strong>Quick Links</strong>
-          <Link to="/">Home</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/team">Team</Link>
-          <Link to="/faq">FAQ</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/" onClick={goToPageStart}>Home</Link>
+          <Link to="/services" onClick={goToPageStart}>Services</Link>
+          <Link to="/team" onClick={goToPageStart}>Team</Link>
+          <Link to="/faq" onClick={goToPageStart}>FAQ</Link>
+          <Link to="/contact" onClick={goToPageStart}>Contact</Link>
         </nav>
 
         <div className="footer-column d-grid">

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import './WhyChoose.css'
 import assessmentIcon from '../../assets/icons/assessment.png'
 import physicalTherapyIcon from '../../assets/icons/physical-therapy.png'
@@ -37,8 +38,33 @@ const processSteps = [
 ]
 
 function WhyChoose() {
+  const sectionRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    if (!sectionRef.current || isVisible) return undefined
+
+    // Starts the process-card slide animation when this section reaches the viewport.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.25 },
+    )
+
+    observer.observe(sectionRef.current)
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
   return (
-    <section className="section feature-section container-fluid">
+    <section
+      className={`section feature-section container-fluid ${isVisible ? 'is-visible' : ''}`}
+      ref={sectionRef}
+    >
       <div className="why-process-heading text-center mx-auto">
         <p className="eyebrow">How It Works</p>
         <h2>Our working process</h2>

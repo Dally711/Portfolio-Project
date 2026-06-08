@@ -51,9 +51,16 @@
 }
 
 .navbar nav a:hover,
-.navbar nav a:focus-visible,
-.navbar nav a.active {
+.navbar nav a:focus-visible {
   color: var(--accent-lime);
+}
+
+.navbar .navbar-nav .nav-link.active {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-lime);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
 }
 
 .menu-toggle {

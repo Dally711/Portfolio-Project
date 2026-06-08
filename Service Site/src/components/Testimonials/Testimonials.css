@@ -3,6 +3,10 @@
   padding-block: clamp(72px, 7vw, 108px);
 }
 
+.partners-band + .testimonials-section {
+  padding-top: clamp(40px, 5vw, 64px);
+}
+
 .testimonials-section .center-heading {
   margin-bottom: 48px;
 }

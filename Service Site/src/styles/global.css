@@ -12,6 +12,30 @@ body {
   margin: 0;
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 button,
 input,
 select,
@@ -63,6 +87,7 @@ em {
 }
 
 .section {
+  animation: fade-up 700ms ease both;
   padding: clamp(72px, 8vw, 124px) clamp(22px, 8vw, 154px);
   background: var(--white);
 }
@@ -150,7 +175,7 @@ em {
   color: var(--white);
   background: #0c8783;
   border-color: #0c8783;
-  transform: translateY(-1px);
+  transform: translateY(-3px);
 }
 
 .button-small {
@@ -366,5 +391,16 @@ button:focus-visible {
   .arrow-icon {
     width: 32px;
     height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
   }
 }

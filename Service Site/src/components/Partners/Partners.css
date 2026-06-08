@@ -1,7 +1,8 @@
 .partners-band {
+  animation: fade-up 700ms ease both;
   display: grid;
   gap: clamp(28px, 4vw, 44px);
-  padding: clamp(52px, 6vw, 78px) clamp(18px, 6vw, 110px);
+  padding: clamp(72px, 7vw, 104px) clamp(18px, 6vw, 110px) clamp(52px, 6vw, 78px);
   background: var(--white);
   text-align: center;
 }
@@ -22,13 +23,25 @@
 }
 
 .partner-logo {
+  animation: soft-scale 600ms ease both;
   flex: 0 0 auto;
   width: clamp(140px, 16vw, 245px);
   min-height: 108px;
   margin: 0;
   padding: 10px;
   opacity: 1;
-  transition: transform 160ms ease;
+}
+
+.partner-logo:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.partner-logo:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.partner-logo:nth-child(4) {
+  animation-delay: 270ms;
 }
 
 .partner-logo img {

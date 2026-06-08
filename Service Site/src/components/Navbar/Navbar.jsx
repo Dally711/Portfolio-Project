@@ -17,11 +17,14 @@ function ArrowIcon() {
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const closeMenu = () => setMenuOpen(false)
+  const goToPageStart = () => {
+    setMenuOpen(false)
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }
 
   return (
     <header className="navbar navbar-expand-lg">
-      <Link className="brand" to="/" aria-label="Meridian home">
+      <Link className="brand" to="/" aria-label="Meridian home" onClick={goToPageStart}>
         <img src={meridianLogoWhite} alt="Meridian Health Physiotherapy" />
       </Link>
       <button
@@ -41,13 +44,13 @@ function Navbar() {
         id="primary-navigation"
         aria-label="Primary navigation"
       >
-        <NavLink className="nav-link" to="/" end onClick={closeMenu}>Home</NavLink>
-        <NavLink className="nav-link" to="/services" onClick={closeMenu}>Services</NavLink>
-        <NavLink className="nav-link" to="/team" onClick={closeMenu}>Team</NavLink>
-        <NavLink className="nav-link" to="/faq" onClick={closeMenu}>FAQ</NavLink>
-        <NavLink className="nav-link" to="/contact" onClick={closeMenu}>Contact</NavLink>
+        <NavLink className="nav-link" to="/" end onClick={goToPageStart}>Home</NavLink>
+        <NavLink className="nav-link" to="/services" onClick={goToPageStart}>Services</NavLink>
+        <NavLink className="nav-link" to="/team" onClick={goToPageStart}>Team</NavLink>
+        <NavLink className="nav-link" to="/faq" onClick={goToPageStart}>FAQ</NavLink>
+        <NavLink className="nav-link" to="/contact" onClick={goToPageStart}>Contact</NavLink>
       </nav>
-      <Link className="btn button button-small" to="/booking" onClick={closeMenu}>
+      <Link className="btn button button-small" to="/booking" onClick={goToPageStart}>
         <span className="button-text">Book Appointment</span> <ArrowIcon />
       </Link>
     </header>

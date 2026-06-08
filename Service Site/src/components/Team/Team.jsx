@@ -12,15 +12,15 @@ const therapists = [
     image: teamImageOne,
   },
   {
-    name: 'Michael Chen',
+    name: 'Gregory House',
     specialty: 'Back Pain and Mobility Specialist',
-    bio: 'Michael focuses on spinal mobility, persistent back pain, and practical movement strategies for daily life.',
+    bio: 'Gregory focuses on spinal mobility, persistent back pain, and practical movement strategies for daily life.',
     image: teamImageTwo,
   },
   {
-    name: 'Amara Johnson',
+    name: 'Meredith Grey',
     specialty: 'Post-Surgery Rehabilitation Specialist',
-    bio: 'Amara supports patients after orthopedic procedures with structured progressions and careful monitoring.',
+    bio: 'Meredith supports patients after orthopedic procedures with structured progressions and careful monitoring.',
     image: teamImageThree,
   },
 ]
