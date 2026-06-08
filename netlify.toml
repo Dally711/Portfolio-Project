@@ -1,4 +1,4 @@
 [build]
-  base = "seg3125-portfolio"
+  base = "Portfolio/seg3125-portfolio"
   command = "npm run build"
   publish = "dist"
