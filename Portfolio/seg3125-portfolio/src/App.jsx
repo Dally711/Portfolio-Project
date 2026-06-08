@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import './App.css'
+import serviceSiteImage from './assets/physiotherapist-helping-patient-her-clinic.jpg'
 import webDevelopmentIcon from './assets/web-development.svg'
 import workflowIcon from './assets/workflow.svg'
 
@@ -119,10 +120,22 @@ function App() {
           <div className="row g-4">
             <div className="col-sm-6 col-lg-3">
               <div className="card project-card h-100 shadow-sm">
+                <img
+                  className="card-img-top project-card-image"
+                  src={serviceSiteImage}
+                  alt="Meridian Health Physiotherapy service website preview"
+                />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Service Site</h3>
                   <p className="card-text text-secondary">A business website for booking and service information.</p>
-                  <button className="btn btn-outline-primary mt-auto" type="button">Coming Soon</button>
+                  <a
+                    className="btn btn-outline-primary mt-auto"
+                    href="https://meridianhealthphysiotherapy.netlify.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Website
+                  </a>
                 </div>
               </div>
             </div>

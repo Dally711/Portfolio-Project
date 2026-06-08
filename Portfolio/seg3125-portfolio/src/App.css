@@ -103,6 +103,12 @@
 .project-card {
   border: 0;
   border-radius: 1rem;
+  overflow: hidden;
+}
+
+.project-card-image {
+  height: 165px;
+  object-fit: cover;
 }
 
 .project-card .card-body {
