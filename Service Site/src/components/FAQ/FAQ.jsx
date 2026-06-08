@@ -86,7 +86,12 @@ function FAQ() {
                     aria-expanded={isOpen}
                   >
                     <span>{faq.question}</span>
-                    <span className="faq-toggle">{isOpen ? '-' : '+'}</span>
+                    <span className="faq-toggle" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path className="faq-toggle-horizontal" d="M6 12h12" />
+                        <path className="faq-toggle-vertical" d="M12 6v12" />
+                      </svg>
+                    </span>
                   </button>
                   <div className="faq-answer-wrap" aria-hidden={!isOpen}>
                     <p className="faq-answer">{faq.answer}</p>

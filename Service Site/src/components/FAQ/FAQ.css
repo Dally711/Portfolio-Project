@@ -59,11 +59,30 @@
   background: var(--white);
   border: 1px solid #cfe0ea;
   border-radius: 999px;
-  font-size: 1.8rem;
-  line-height: 1;
   transition:
     color 180ms ease,
     border-color 180ms ease,
+    transform 220ms ease;
+}
+
+.faq-toggle svg {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.faq-toggle path {
+  fill: none;
+}
+
+.faq-toggle-vertical {
+  transform-origin: center;
+  transition:
+    opacity 180ms ease,
     transform 220ms ease;
 }
 
@@ -71,6 +90,11 @@
   color: var(--primary-blue);
   border-color: rgba(13, 78, 166, 0.34);
   transform: rotate(180deg);
+}
+
+.faq-item.is-open .faq-toggle-vertical {
+  opacity: 0;
+  transform: scaleY(0);
 }
 
 .faq-answer-wrap {
