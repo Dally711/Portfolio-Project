@@ -138,7 +138,7 @@
   position: absolute;
   left: 50%;
   bottom: 0;
-  color: rgba(13, 78, 166, 0.11);
+  color: rgba(13, 78, 166, 0.18);
   font-size: clamp(3.75rem, 6.4vw, 5.6rem);
   font-weight: 900;
   line-height: 0.8;
