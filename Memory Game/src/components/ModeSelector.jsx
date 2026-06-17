@@ -1,7 +1,7 @@
 function ModeSelector({ mode, disabled, onModeChange }) {
   return (
     // The select input controls which set of game rules is active.
-    <div>
+    <div className="mode-section">
       <label className="form-label fw-semibold" htmlFor="mode-selector">
         Game Mode
       </label>
@@ -12,10 +12,26 @@ function ModeSelector({ mode, disabled, onModeChange }) {
         value={mode}
         disabled={disabled}
         onChange={(event) => onModeChange(event.target.value)}
-      >
-        <option value="order">Sequence Mode</option>
+      > 
+        <option value="order">Sequence Mode</option> 
         <option value="pattern">Pattern Mode</option>
       </select>
+
+      <label className="instructions fw-semibold">Instructions</label>
+
+
+      <p className="form-text"> 
+        {mode === "order" ?( //If mode = order text 1 if not, text 2
+          <> 
+            Memorize the sequence in the <b>exact order</b> shown
+          </>
+        ) : (
+          <>
+            Memorize all highlighted tiles that appear <b>at the same time</b> and select them in <b>any order</b>
+          </>
+          
+        )}
+      </p>
     </div>
   );
 }

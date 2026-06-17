@@ -13,13 +13,13 @@ function App() {
     <main className="app-shell py-5">
       <div className="container">
         <section className="game-panel mx-auto">
-          <div className="d-flex flex-column gap-4">
+          <div className="game-content">
             <GameHeader
               soundEnabled={game.soundEnabled}
               onSoundToggle={game.setSoundEnabled}
             />
 
-            <p className="text-secondary mb-0">
+            <p className="intro-text text-secondary mb-0">
               Memorize the highlighted tiles, then repeat them back in the selected mode.
             </p>
 
