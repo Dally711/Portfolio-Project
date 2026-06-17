@@ -11,6 +11,7 @@ const SHOW_DELAY = 450;
 const STEP_DELAY = 650;
 const CLEAR_SELECTION_DELAY = 500; //To wait for the tiles to become gray again before showing the next round.
 const NEXT_ROUND_DELAY = 900; // 
+const TILE_SOUND_DURATION = 0.14;
 
 // The grid grows every 3 levels: 3x3, then 4x4, then 5x5, etc.
 function getGridSize(level) {
@@ -69,10 +70,50 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [isShowing, setIsShowing] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   // timersRef keeps every pending timeout so Restart can cancel animations.
   const timersRef = useRef([]);
+  const audioContextRef = useRef(null);
   const gridSize = getGridSize(level);
   const tiles = createTiles(gridSize);
+
+  // Creates the audio context only after the player interacts with the game.
+  function getAudioContext() {
+    if (!audioContextRef.current) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioContextRef.current = new AudioContext();
+    }
+
+    return audioContextRef.current;
+  }
+
+  // Plays a short generated tone when sound is enabled.
+  function playTone(frequency, duration = TILE_SOUND_DURATION) {
+    if (!soundEnabled) {
+      return;
+    }
+
+    const audioContext = getAudioContext();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const now = audioContext.currentTime;
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency, now);
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start(now);
+    oscillator.stop(now + duration);
+  }
+
+  // Gives each tile a slightly different pitch.
+  function playTileSound(tile) {
+    playTone(220 + tile * 18);
+  }
 
   // Stops all pending highlight and next-round timers.
   function clearTimers() {
@@ -102,6 +143,7 @@ function App() {
     // Pattern Mode lights every tile at the same time.
     if (mode === 'pattern') {  // Wrote "===" instead of "==" because it only chekc value and may convert types automatically
       setActiveTiles(currentSequence);
+      currentSequence.forEach((tile) => playTileSound(tile));
 
       addTimer(() => {
         setActiveTiles([]);
@@ -117,6 +159,7 @@ function App() {
     currentSequence.forEach((tile, index) => {
       addTimer(() => {
         setActiveTiles([tile]);
+        playTileSound(tile);
       }, index * STEP_DELAY);
 
       addTimer(() => {
@@ -193,6 +236,7 @@ function App() {
     const nextPlayerSequence = [...playerSequence, tile];
     setPlayerSequence(nextPlayerSequence);
     setClickedTiles(nextPlayerSequence);
+    playTileSound(tile);
 
     if (nextPlayerSequence.length === sequence.length) {    //If the player selected all the corrected tiles in order
       const nextLevel = level + 1;
@@ -212,6 +256,7 @@ function App() {
     const nextPlayerSequence = [...playerSequence, tile];
     setPlayerSequence(nextPlayerSequence);
     setClickedTiles(nextPlayerSequence);
+    playTileSound(tile);
 
     if (nextPlayerSequence.length === sequence.length) {
       const nextLevel = level + 1;
@@ -229,6 +274,7 @@ function App() {
     setIsShowing(true);
     setMessage('Correct. Next round.');
     setStatus('success');
+    playTone(620, 0.18);
 
     // Let the player see their final selected tiles before clearing them.
     addTimer(() => {
@@ -252,6 +298,7 @@ function App() {
     setGameOver(true);
     setMessage(gameOverMessage);
     setStatus('error');
+    playTone(120, 0.35);
   }
 
   // Changing modes resets the current game so the rules stay consistent.
@@ -296,8 +343,10 @@ function App() {
             {/* Provides the Start and Restart buttons. */}
             <Controls
               gameStarted={gameStarted}
+              soundEnabled={soundEnabled}
               onStart={startGame}
               onRestart={restartGame}
+              onSoundToggle={setSoundEnabled}
             />
           </div>
         </section>
