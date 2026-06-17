@@ -44,7 +44,7 @@ function Footer() {
         </div>
 
         <div className="footer-column footer-contact d-grid">
-          <strong>Quick Contact</strong>
+          <strong>Contact</strong>
           <span>Address</span>
           <span>308 Negra Arroyo Lane, Albuquerque, NM</span>
           <a className="footer-phone" href="tel:+15058425662">
