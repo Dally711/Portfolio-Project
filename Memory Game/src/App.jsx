@@ -5,32 +5,43 @@ import GameBoard from './components/GameBoard';
 import ModeSelector from './components/ModeSelector';
 import ScoreBoard from './components/ScoreBoard';
 
-const TILES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const STARTING_GRID_SIZE = 3;
+const LEVELS_PER_GRID_SIZE = 3;
 const SHOW_DELAY = 450;
 const STEP_DELAY = 650;
 const CLEAR_SELECTION_DELAY = 500; //To wait for the tiles to become gray again before showing the next round.
 const NEXT_ROUND_DELAY = 900; // 
 
-// Returns one random tile number from the 3 by 3 grid.
-function getRandomTile() {
-  return TILES[Math.floor(Math.random() * TILES.length)];
+// The grid grows every 3 levels: 3x3, then 4x4, then 5x5, etc.
+function getGridSize(level) {
+  return STARTING_GRID_SIZE + Math.floor((level - 1) / LEVELS_PER_GRID_SIZE);
+}
+
+// Creates the tile numbers for the current grid size.
+function createTiles(gridSize) {
+  return Array.from({ length: gridSize * gridSize }, (_, index) => index + 1);
+}
+
+// Returns one random tile number from the current board.
+function getRandomTile(tiles) {
+  return tiles[Math.floor(Math.random() * tiles.length)];
 }
 
 // Creates a pattern with unique random tiles for Pattern Mode.
-function getRandomPattern(size) {
-  return [...TILES].sort(() => Math.random() - 0.5).slice(0, size);
+function getRandomPattern(size, tiles) {
+  return [...tiles].sort(() => Math.random() - 0.5).slice(0, size);
 }
 
 // Creates a fresh random sequence for Sequence Mode.
-function getRandomSequence(size, excludedFirstTile = null) {
+function getRandomSequence(size, tiles, excludedFirstTile = null) {
   const sequence = [];
 
   for (let index = 0; index < size; index += 1) {
-    let tile = getRandomTile();
+    let tile = getRandomTile(tiles);
 
     if (index === 0 && excludedFirstTile !== null) {
       while (tile === excludedFirstTile) {
-        tile = getRandomTile();
+        tile = getRandomTile(tiles);
       }
     }
 
@@ -59,6 +70,8 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   // timersRef keeps every pending timeout so Restart can cancel animations.
   const timersRef = useRef([]);
+  const gridSize = getGridSize(level);
+  const tiles = createTiles(gridSize);
 
   // Stops all pending highlight and next-round timers.
   function clearTimers() {
@@ -116,7 +129,10 @@ function App() {
 
   // Starts a new game using the currently selected mode.
   function startGame() {
-    const firstSequence = mode === 'order' ? getRandomSequence(1) : getRandomPattern(1);
+    const startingTiles = createTiles(getGridSize(1));
+    const firstSequence = mode === 'order'
+      ? getRandomSequence(1, startingTiles)
+      : getRandomPattern(1, startingTiles);
 
     clearTimers();
     setSequence(firstSequence);
@@ -173,8 +189,10 @@ function App() {
     setClickedTiles(nextPlayerSequence);
 
     if (nextPlayerSequence.length === sequence.length) {    //If the player selected all the corrected tiles in order
+      const nextLevel = level + 1;
+      const nextTiles = createTiles(getGridSize(nextLevel));
       const lastTile = sequence[sequence.length - 1];
-      advanceRound(getRandomSequence(level + 1, lastTile)); //Advance to the next round
+      advanceRound(getRandomSequence(nextLevel, nextTiles, lastTile)); //Advance to the next round
     }
   }
 
@@ -190,12 +208,10 @@ function App() {
     setClickedTiles(nextPlayerSequence);
 
     if (nextPlayerSequence.length === sequence.length) {
-      if (level === TILES.length) {
-        winGame();
-        return;
-      }
+      const nextLevel = level + 1;
+      const nextTiles = createTiles(getGridSize(nextLevel));
 
-      advanceRound(getRandomPattern(Math.min(level + 1, TILES.length)));
+      advanceRound(getRandomPattern(nextLevel, nextTiles));
     }
   }
 
@@ -204,7 +220,6 @@ function App() {
     const nextLevel = level + 1;
 
     setScore((currentScore) => currentScore + 1);
-    setLevel(nextLevel);
     setIsShowing(true);
     setMessage('Correct. Next round.');
 
@@ -215,6 +230,7 @@ function App() {
 
     // Start the next round only after the board has been cleared for a moment.
     addTimer(() => {
+      setLevel(nextLevel);
       setSequence(nextSequence);
       showRound(nextSequence);
     }, NEXT_ROUND_DELAY);
@@ -228,17 +244,6 @@ function App() {
     setIsShowing(false);
     setGameOver(true);
     setMessage(gameOverMessage);
-  }
-
-  // Ends Pattern Mode successfully after the player reaches all 9 tiles.
-  function winGame() {
-    clearTimers();
-    setActiveTiles([]);
-    setClickedTiles([]);
-    setIsShowing(false);
-    setScore((currentScore) => currentScore + 1);
-    setGameOver(true);
-    setMessage('You memorized all 9 tiles. You win!');
   }
 
   // Changing modes resets the current game so the rules stay consistent.
@@ -270,9 +275,10 @@ function App() {
             {/* Displays the current progress and game message. */}
             <ScoreBoard level={level} score={score} message={message} />
 
-            {/* Renders the 3 by 3 clickable tile board. */}
+            {/* Renders the clickable tile board using the current grid size. */}
             <GameBoard
-              tiles={TILES}
+              tiles={tiles}
+              gridSize={gridSize}
               activeTiles={activeTiles}
               clickedTiles={clickedTiles}
               disabled={!gameStarted || isShowing || gameOver}
