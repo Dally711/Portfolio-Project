@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Noto Sans', system-ui, 'Segoe UI', Roboto, sans-serif; /*tries them in order*/
   font-size: 16px;
   color: #1f2937;
   background: #f7f8fb;
