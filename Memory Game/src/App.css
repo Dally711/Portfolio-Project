@@ -22,7 +22,7 @@
 }
 
 .tile {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /*Makes the tiles square*/
   border: 0;
   border-radius: 8px;
   font-size: clamp(1.5rem, 6vw, 2.5rem);
@@ -38,17 +38,21 @@
   transform: translateY(-2px);
 }
 
-.tile.tile-idle {
+.tile.tile-idle,
+.tile.tile-idle:disabled {
   color: #f8fafc !important;
+  background-color: #2f4f5f !important;
   background: #2f4f5f !important;
+  opacity: 1 !important;
 }
 
 .tile.tile-active,
 .tile.tile-active:disabled {
   color: #1d2630 !important;
+  background-color: greenyellow !important;
   background: greenyellow !important;
   box-shadow: 0 0 0 4px rgba(255, 200, 87, 0.32);
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .score-board {
