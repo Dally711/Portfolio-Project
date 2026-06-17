@@ -84,8 +84,41 @@
 
 .message {
   min-height: 1.5rem;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   color: #334155;
   font-weight: 600;
+}
+
+.message-ready {
+  color: #334155;
+  background: #eef2f7;
+  border-color: #d7dee8;
+}
+
+.message-watching {
+  color: #5b3a00;
+  background: #fff2bf;
+  border-color: #ffd866;
+}
+
+.message-playing {
+  color: #0f5132;
+  background: #d1f3df;
+  border-color: #8dddad;
+}
+
+.message-success {
+  color: #244b7a;
+  background: #dcecff;
+  border-color: #9cc7f5;
+}
+
+.message-error {
+  color: #842029;
+  background: #f8d7da;
+  border-color: #f1aeb5;
 }
 
 @media (max-width: 575.98px) {

@@ -1,4 +1,4 @@
-function ScoreBoard({ level, score, message }) {
+function ScoreBoard({ level, score, message, status }) {
   return (
     // The scoreboard groups the player's level, score, and current instruction.
     <div className="score-board">
@@ -19,7 +19,7 @@ function ScoreBoard({ level, score, message }) {
         </div>
       </div>
       {/* Message changes based on the current game state. */}
-      <p className="message mb-0 mt-3">{message}</p>
+      <p className={`message message-${status} mb-0 mt-3`}>{message}</p>
     </div>
   );
 }

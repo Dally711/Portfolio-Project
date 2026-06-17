@@ -65,6 +65,7 @@ function App() {
   const [level, setLevel] = useState(1);
   const [score, setScore] = useState(0);
   const [message, setMessage] = useState('Choose a mode and start the game.');
+  const [status, setStatus] = useState('ready');
   const [gameStarted, setGameStarted] = useState(false);
   const [isShowing, setIsShowing] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -96,6 +97,7 @@ function App() {
     setPlayerSequence([]);
     setClickedTiles([]);
     setMessage(mode === 'order' ? 'Watch the sequence.' : 'Memorize the pattern.');
+    setStatus('watching');
 
     // Pattern Mode lights every tile at the same time.
     if (mode === 'pattern') {  // Wrote "===" instead of "==" because it only chekc value and may convert types automatically
@@ -105,6 +107,7 @@ function App() {
         setActiveTiles([]);
         setIsShowing(false);
         setMessage('Your turn.');
+        setStatus('playing');
       }, SHOW_DELAY + currentSequence.length * 180);
 
       return;
@@ -124,6 +127,7 @@ function App() {
     addTimer(() => {
       setIsShowing(false);
       setMessage('Your turn.');
+      setStatus('playing');
     }, currentSequence.length * STEP_DELAY);
   }
 
@@ -143,6 +147,7 @@ function App() {
     setGameStarted(true);
     setGameOver(false);
     setMessage('Watch carefully.');
+    setStatus('watching');
     showRound(firstSequence);
   }
 
@@ -159,6 +164,7 @@ function App() {
     setGameOver(false);
     setIsShowing(false);
     setMessage('Choose a mode and start the game.');
+    setStatus('ready');
   }
 
   // Routes the click to the correct validation rule for the selected mode.
@@ -222,6 +228,7 @@ function App() {
     setScore((currentScore) => currentScore + 1);
     setIsShowing(true);
     setMessage('Correct. Next round.');
+    setStatus('success');
 
     // Let the player see their final selected tiles before clearing them.
     addTimer(() => {
@@ -244,6 +251,7 @@ function App() {
     setIsShowing(false);
     setGameOver(true);
     setMessage(gameOverMessage);
+    setStatus('error');
   }
 
   // Changing modes resets the current game so the rules stay consistent.
@@ -273,7 +281,7 @@ function App() {
             />
 
             {/* Displays the current progress and game message. */}
-            <ScoreBoard level={level} score={score} message={message} />
+            <ScoreBoard level={level} score={score} message={message} status={status} />
 
             {/* Renders the clickable tile board using the current grid size. */}
             <GameBoard
