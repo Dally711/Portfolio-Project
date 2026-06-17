@@ -1,6 +1,6 @@
 
 
-function Tile({ isActive, isSelected, disabled, onClick }) {
+function Tile({ number, isActive, isSelected, disabled, onClick }) {
   // Keep the tile lit when it is being shown or after the player clicks it.
   const tileClass = isActive || isSelected ? 'tile-active' : 'tile-idle';
 
@@ -9,7 +9,9 @@ function Tile({ isActive, isSelected, disabled, onClick }) {
       className={`tile btn w-100 ${tileClass}`}
       disabled={disabled}
       onClick={onClick}
-    ></button>
+    >
+    {number}
+    </button>
   );
 }
 

@@ -12,6 +12,7 @@ function GameBoard({ tiles, gridSize, activeTiles, clickedTiles, disabled, onTil
         {tiles.map((tile) => (
             <Tile
                 key={tile}
+                //number={tile} If i wanna add numbers
                 isActive={activeTiles.includes(tile)}
                 isSelected={clickedTiles.includes(tile)}
                 disabled={disabled}
