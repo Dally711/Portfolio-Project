@@ -14,6 +14,24 @@
   box-shadow: 0 18px 48px rgba(25, 36, 50, 0.12);
 }
 
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sound-toggle {
+  flex: 0 0 auto;
+  min-height: 0;
+}
+
+.sound-toggle .form-check-label {
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .game-board {
   display: grid;
   gap: 12px;
@@ -129,5 +147,15 @@
 
   .game-panel {
     padding: 20px;
+  }
+
+  .game-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sound-toggle {
+    align-self: flex-end;
   }
 }

@@ -313,8 +313,24 @@ function App() {
         <section className="game-panel mx-auto">
           <div className="d-flex flex-column gap-4">
             {/* Game title and short instruction text. */}
+            <div className="game-header">
+              <h1 className="mb-0">Memory Game</h1>
+              {/* Sound switch stays aligned with the game title. */}
+              <div className="form-check form-switch sound-toggle">
+                <input
+                  id="sound-toggle"
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={soundEnabled}
+                  onChange={(event) => setSoundEnabled(event.target.checked)}
+                />
+                <label className="form-check-label" htmlFor="sound-toggle">
+                  Sound {soundEnabled ? 'On' : 'Off'}
+                </label>
+              </div>
+            </div>
+
             <div>
-              <h1 className="mb-2">Memory Game</h1>
               <p className="text-secondary mb-0">
                 Memorize the highlighted tiles, then repeat them back in the selected mode.
               </p>
@@ -343,10 +359,8 @@ function App() {
             {/* Provides the Start and Restart buttons. */}
             <Controls
               gameStarted={gameStarted}
-              soundEnabled={soundEnabled}
               onStart={startGame}
               onRestart={restartGame}
-              onSoundToggle={setSoundEnabled}
             />
           </div>
         </section>
