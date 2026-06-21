@@ -6,6 +6,7 @@ import {
   STEP_DELAY,
 } from '../constants/gameConfig';
 import {
+  calculateRoundScore,
   createTiles,
   getGridSize,
   getRandomPattern,
@@ -33,6 +34,7 @@ function useMemoryGame() {
   const [gameOver, setGameOver] = useState(false);
   // timersRef keeps every pending timeout so Restart can cancel animations.
   const timersRef = useRef([]);
+  const turnStartTimeRef = useRef(null);
   const { soundEnabled, setSoundEnabled, playTone, playTileSound } = useSound();
 
   const gridSize = getGridSize(level);
@@ -73,6 +75,7 @@ function useMemoryGame() {
         setIsShowing(false);
         setMessage('Your turn.');
         setStatus('playing');
+        turnStartTimeRef.current = Date.now();
       }, SHOW_DELAY + currentSequence.length * 180);
 
       return;
@@ -94,6 +97,7 @@ function useMemoryGame() {
       setIsShowing(false);
       setMessage('Your turn.');
       setStatus('playing');
+      turnStartTimeRef.current = Date.now();
     }, currentSequence.length * STEP_DELAY);
   }
 
@@ -108,6 +112,7 @@ function useMemoryGame() {
     setSequence(firstSequence);
     setPlayerSequence([]);
     setClickedTiles([]);
+    turnStartTimeRef.current = null;
     setLevel(1);
     setScore(0);
     setGameStarted(true);
@@ -123,6 +128,7 @@ function useMemoryGame() {
     setSequence([]);
     setPlayerSequence([]);
     setClickedTiles([]);
+    turnStartTimeRef.current = null;
     setActiveTiles([]);
     setLevel(1);
     setScore(0);
@@ -193,11 +199,21 @@ function useMemoryGame() {
   // Moves to the next round and shows the newly generated sequence or pattern.
   function advanceRound(nextSequence) {
     const nextLevel = level + 1;
+    const timeTaken = turnStartTimeRef.current
+      ? (Date.now() - turnStartTimeRef.current) / 1000
+      : 0;
+    const pointsEarned = calculateRoundScore({
+      level,
+      gridSize,
+      mode,
+      timeTaken,
+    });
 
-    setScore((currentScore) => currentScore + 1);
+    setScore((currentScore) => currentScore + pointsEarned);
     setIsShowing(true);
-    setMessage('Correct. Next round.');
+    setMessage(`Correct. +${pointsEarned} points.`);
     setStatus('success');
+    turnStartTimeRef.current = null;
     playTone(620, 0.18);
 
     // Let the player see their final selected tiles before clearing them.
@@ -218,6 +234,7 @@ function useMemoryGame() {
     clearTimers();
     setActiveTiles([]);
     setClickedTiles([]);
+    turnStartTimeRef.current = null;
     setIsShowing(false);
     setGameOver(true);
     setMessage(gameOverMessage);

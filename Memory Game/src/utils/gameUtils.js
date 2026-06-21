@@ -1,4 +1,8 @@
-import { LEVELS_PER_GRID_SIZE, STARTING_GRID_SIZE } from '../constants/gameConfig';
+import {
+  LEVELS_PER_GRID_SIZE,
+  MAX_SPEED_BONUS_TIME,
+  STARTING_GRID_SIZE,
+} from '../constants/gameConfig';
 
 // The grid grows every 3 levels: 3x3, then 4x4, then 5x5, etc.
 export function getGridSize(level) {
@@ -37,4 +41,13 @@ export function getRandomSequence(size, tiles, excludedFirstTile = null) {
   }
 
   return sequence;
+}
+
+// Calculates round points from difficulty and answer speed.
+export function calculateRoundScore({ level, gridSize, mode, timeTaken }) {
+  const modeMultiplier = mode === 'order' ? 2 : 1;
+  const basePoints = level * gridSize * modeMultiplier;
+  const speedBonus = Math.max(0, MAX_SPEED_BONUS_TIME - timeTaken) * gridSize;
+
+  return Math.round(basePoints + speedBonus);
 }
