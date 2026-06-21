@@ -1,6 +1,10 @@
 import {
+  BASE_SCORE_DECAY_TIME,
+  EXTRA_DECAY_TIME_PER_GRID_SIZE,
+  EXTRA_DECAY_TIME_PER_LEVEL,
   LEVELS_PER_GRID_SIZE,
-  MAX_SPEED_BONUS_TIME,
+  MAX_ROUND_SCORE,
+  MIN_ROUND_SCORE,
   STARTING_GRID_SIZE,
 } from '../constants/gameConfig';
 
@@ -44,10 +48,12 @@ export function getRandomSequence(size, tiles, excludedFirstTile = null) {
 }
 
 // Calculates round points from difficulty and answer speed.
-export function calculateRoundScore({ level, gridSize, mode, timeTaken }) {
-  const modeMultiplier = mode === 'order' ? 2 : 1;
-  const basePoints = level * gridSize * modeMultiplier;
-  const speedBonus = Math.max(0, MAX_SPEED_BONUS_TIME - timeTaken) * gridSize;
+export function calculateRoundScore({ level, gridSize, timeTaken }) {
+  const scoreRange = MAX_ROUND_SCORE - MIN_ROUND_SCORE;
+  const decayTime = BASE_SCORE_DECAY_TIME
+    + (level - 1) * EXTRA_DECAY_TIME_PER_LEVEL
+    + (gridSize - STARTING_GRID_SIZE) * EXTRA_DECAY_TIME_PER_GRID_SIZE;
+  const timeScoreRatio = Math.exp(-timeTaken / decayTime);
 
-  return Math.round(basePoints + speedBonus);
+  return Math.round(MIN_ROUND_SCORE + scoreRange * timeScoreRatio);
 }

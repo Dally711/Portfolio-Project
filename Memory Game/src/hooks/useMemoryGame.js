@@ -3,6 +3,7 @@ import {
   CLEAR_SELECTION_DELAY,
   NEXT_ROUND_DELAY,
   SHOW_DELAY,
+  START_COUNTDOWN_SECONDS,
   STEP_DELAY,
 } from '../constants/gameConfig';
 import {
@@ -13,6 +14,31 @@ import {
   getRandomSequence,
 } from '../utils/gameUtils';
 import useSound from './useSound';
+
+const RECORD_STORAGE_KEY = 'memoryGameRecords';
+const DEFAULT_RECORDS = {
+  order: 0,
+  pattern: 0,
+};
+
+// Loads separate records for Sequence Mode and Pattern Mode from the browser.
+function getSavedRecords() {
+  const savedRecords = window.localStorage.getItem(RECORD_STORAGE_KEY);
+  // Keeps compatibility with the older single-record storage key.
+  const oldRecord = Number(window.localStorage.getItem('memoryGameRecord') || 0);
+
+  if (!savedRecords) {
+    return {
+      order: oldRecord,
+      pattern: 0,
+    };
+  }
+
+  return {
+    ...DEFAULT_RECORDS,
+    ...JSON.parse(savedRecords),
+  };
+}
 
 function useMemoryGame() {
   // sequence stores the correct answer for the current round.
@@ -32,8 +58,16 @@ function useMemoryGame() {
   const [gameStarted, setGameStarted] = useState(false);
   const [isShowing, setIsShowing] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  // recordScores stores the best score for each game mode.
+  const [recordScores, setRecordScores] = useState(getSavedRecords);
+  const [recap, setRecap] = useState(null);
+  const [countdown, setCountdown] = useState(null);
   // timersRef keeps every pending timeout so Restart can cancel animations.
   const timersRef = useRef([]);
+  // These refs keep the latest score data available inside timer callbacks.
+  const scoreRef = useRef(0);
+  const roundScoresRef = useRef([]);
+  const recordScoresRef = useRef(recordScores);
   const turnStartTimeRef = useRef(null);
   const { soundEnabled, setSoundEnabled, playTone, playTileSound } = useSound();
 
@@ -113,13 +147,31 @@ function useMemoryGame() {
     setPlayerSequence([]);
     setClickedTiles([]);
     turnStartTimeRef.current = null;
+    scoreRef.current = 0;
+    roundScoresRef.current = [];
+    setCountdown(START_COUNTDOWN_SECONDS);
     setLevel(1);
     setScore(0);
+    setRecap(null);
     setGameStarted(true);
     setGameOver(false);
-    setMessage('Watch carefully.');
-    setStatus('watching');
-    showRound(firstSequence);
+    setMessage(`Starting in ${START_COUNTDOWN_SECONDS}...`);
+    setStatus('ready');
+
+    for (let secondsLeft = START_COUNTDOWN_SECONDS - 1; secondsLeft > 0; secondsLeft -= 1) {
+      addTimer(() => {
+        setCountdown(secondsLeft);
+        setMessage(`Starting in ${secondsLeft}...`);
+      }, (START_COUNTDOWN_SECONDS - secondsLeft) * 1000);
+    }
+
+    addTimer(() => {
+      setCountdown(null);
+      setSequence(firstSequence);
+      setMessage('Watch carefully.');
+      setStatus('watching');
+      showRound(firstSequence);
+    }, START_COUNTDOWN_SECONDS * 1000);
   }
 
   // Returns the game to the initial pre-start state.
@@ -129,9 +181,13 @@ function useMemoryGame() {
     setPlayerSequence([]);
     setClickedTiles([]);
     turnStartTimeRef.current = null;
+    scoreRef.current = 0;
+    roundScoresRef.current = [];
+    setCountdown(null);
     setActiveTiles([]);
     setLevel(1);
     setScore(0);
+    setRecap(null);
     setGameStarted(false);
     setGameOver(false);
     setIsShowing(false);
@@ -141,7 +197,7 @@ function useMemoryGame() {
 
   // Routes the click to the correct validation rule for the selected mode.
   function handleTileClick(tile) {
-    if (!gameStarted || isShowing || gameOver) {
+    if (!gameStarted || isShowing || gameOver || countdown !== null) {
       return;
     }
 
@@ -205,11 +261,23 @@ function useMemoryGame() {
     const pointsEarned = calculateRoundScore({
       level,
       gridSize,
-      mode,
       timeTaken,
     });
+    const roundScore = {
+      round: roundScoresRef.current.length + 1,
+      gridSize,
+      level,
+      points: pointsEarned,
+      timeTaken,
+    };
 
-    setScore((currentScore) => currentScore + pointsEarned);
+    // Save the completed round so the recap can show a score breakdown.
+    roundScoresRef.current = [...roundScoresRef.current, roundScore];
+    setScore((currentScore) => {
+      const nextScore = currentScore + pointsEarned;
+      scoreRef.current = nextScore;
+      return nextScore;
+    });
     setIsShowing(true);
     setMessage(`Correct. +${pointsEarned} points.`);
     setStatus('success');
@@ -239,7 +307,37 @@ function useMemoryGame() {
     setGameOver(true);
     setMessage(gameOverMessage);
     setStatus('error');
+    createRecap();
     playTone(120, 0.35);
+  }
+
+  // Creates the final score summary after the game ends.
+  function createRecap() {
+    const finalScore = scoreRef.current;
+    // Compare only against the record for the mode the player just played.
+    const currentModeRecord = recordScoresRef.current[mode];
+    const isNewRecord = finalScore > currentModeRecord;
+    const nextRecordScores = {
+      ...recordScoresRef.current,
+      [mode]: isNewRecord ? finalScore : currentModeRecord,
+    };
+
+    if (isNewRecord) {
+      // Persist the updated per-mode records in the browser.
+      recordScoresRef.current = nextRecordScores;
+      setRecordScores(nextRecordScores);
+      window.localStorage.setItem(RECORD_STORAGE_KEY, JSON.stringify(nextRecordScores));
+    }
+
+    setRecap({
+      finalScore,
+      isNewRecord,
+      levelReached: level,
+      mode,
+      recordScore: nextRecordScores[mode],
+      roundsCompleted: roundScoresRef.current.length,
+      roundScores: roundScoresRef.current,
+    });
   }
 
   // Changing modes resets the current game so the rules stay consistent.
@@ -251,6 +349,7 @@ function useMemoryGame() {
   return {
     activeTiles,
     clickedTiles,
+    countdown,
     gameOver,
     gameStarted,
     gridSize,
@@ -260,6 +359,8 @@ function useMemoryGame() {
     level,
     message,
     mode,
+    recap,
+    recordScores,
     restartGame,
     score,
     setSoundEnabled,

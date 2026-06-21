@@ -1,9 +1,8 @@
 import './App.css';
-import Controls from './components/Controls';
-import GameBoard from './components/GameBoard';
+import GameplayPanel from './components/GameplayPanel';
 import GameHeader from './components/GameHeader';
-import ModeSelector from './components/ModeSelector';
-import ScoreBoard from './components/ScoreBoard';
+import RecapPanel from './components/RecapPanel';
+import SetupPanel from './components/SetupPanel';
 import useMemoryGame from './hooks/useMemoryGame';
 
 function App() {
@@ -19,35 +18,30 @@ function App() {
               onSoundToggle={game.setSoundEnabled}
             />
 
-            <p className="intro-text text-secondary mb-0">
-              Memorize the highlighted tiles, then repeat them back in the selected mode.
-            </p>
-
-            <ModeSelector
+            <SetupPanel
               mode={game.mode}
               disabled={game.gameStarted && !game.gameOver}
               onModeChange={game.handleModeChange}
+              onStart={game.startGame}
             />
 
-            <ScoreBoard
-              level={game.level}
-              score={game.score}
-              message={game.message}
-              status={game.status}
-            />
-
-            <GameBoard
-              tiles={game.tiles}
-              gridSize={game.gridSize}
+            <GameplayPanel
               activeTiles={game.activeTiles}
               clickedTiles={game.clickedTiles}
+              countdown={game.countdown}
               disabled={!game.gameStarted || game.isShowing || game.gameOver}
+              gridSize={game.gridSize}
+              level={game.level}
+              message={game.message}
+              onRestart={game.restartGame}
               onTileClick={game.handleTileClick}
+              score={game.score}
+              status={game.status}
+              tiles={game.tiles}
             />
 
-            <Controls
-              gameStarted={game.gameStarted}
-              onStart={game.startGame}
+            <RecapPanel
+              recap={game.recap}
               onRestart={game.restartGame}
             />
           </div>

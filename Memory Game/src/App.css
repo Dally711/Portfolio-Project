@@ -20,6 +20,78 @@
   gap: 22px;
 }
 
+.app-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: #f9fbfd;
+}
+
+.app-panel h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.setup-panel {
+  background: #ffffff;
+}
+
+.gameplay-panel {
+  align-items: stretch;
+}
+
+.countdown-display {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  border: 1px solid #ffd866;
+  border-radius: 8px;
+  color: #5b3a00;
+  background: #fff2bf;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.recap-panel {
+  background: #ffffff;
+}
+
+.recap-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.record-badge {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #0f5132;
+  background: #d1f3df;
+  border: 1px solid #8dddad;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.round-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.round-breakdown h3 {
+  margin: 0;
+  color: #334155;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .game-header {
   display: flex;
   align-items: center;
@@ -46,11 +118,11 @@
 }
 
 .intro-text {
-  margin-bottom: -8px !important;
+  margin-bottom: 0 !important;
 }
 
 .mode-section {
-  margin-bottom: -8px;
+  margin-bottom: 0;
 }
 
 .form-label{
@@ -103,10 +175,10 @@
 }
 
 .score-board {
-  padding: 16px;
-  border: 1px solid #e3e8ef;
-  border-radius: 8px;
-  background: #f9fbfd;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .score-stat {
@@ -180,6 +252,10 @@
 
   .game-content {
     gap: 20px;
+  }
+
+  .app-panel {
+    padding: 16px;
   }
 
   .game-header {

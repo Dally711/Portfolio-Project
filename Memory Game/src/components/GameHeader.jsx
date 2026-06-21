@@ -4,7 +4,7 @@ function GameHeader({ soundEnabled, onSoundToggle }) {
   return (
     // Header groups the game title with the sound control.
     <div className="game-header">
-      <h1 className="mb-0">Memory Game</h1>
+      <h1 className="mb-0">El Memory Master</h1>
       <SoundToggle soundEnabled={soundEnabled} onSoundToggle={onSoundToggle} />
     </div>
   );
