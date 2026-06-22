@@ -12,13 +12,13 @@ const MOBILE_BREAKPOINT = 576;
 const HEADER_SIZES = {
   desktop: {
     compactLogoWidth: 120,
-    compactHeight: 92,
+    compactHeight: 85,
     largeHeight: 360,
     largeLogoWidth: 330,
   },
   mobile: {
     compactLogoWidth: 112,
-    compactHeight: 84,
+    compactHeight: 77,
     largeHeight: 300,
     largeLogoWidth: 280,
   },
