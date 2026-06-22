@@ -4,18 +4,22 @@ import { useEffect, useRef, useState } from 'react';
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 // The logo should wait briefly before shrinking, then finish before the setup panel reaches the navbar.
-const TRANSITION_START_TRAVEL = 28;
-const TRANSITION_END_TRAVEL = 174;
+const TRANSITION_START_TRAVEL = 40;
+const TRANSITION_END_TRAVEL = 280;
 const MOBILE_BREAKPOINT = 576;
 
 // Logo sizes for the large centered state and compact navbar state.
 const HEADER_SIZES = {
   desktop: {
-    compactLogoWidth: 76,
+    compactLogoWidth: 120,
+    compactHeight: 92,
+    largeHeight: 360,
     largeLogoWidth: 330,
   },
   mobile: {
-    compactLogoWidth: 72,
+    compactLogoWidth: 112,
+    compactHeight: 84,
+    largeHeight: 300,
     largeLogoWidth: 280,
   },
 };
@@ -25,6 +29,7 @@ function GameHeader({ setupPanelRef }) {
   // Stores the setup panel's first top position so all future scroll math is relative to the starting layout.
   const initialSetupTop = useRef(null);
   const [headerState, setHeaderState] = useState({
+    headerHeight: 360,
     logoWidth: 330,
     progress: 0,
   });
@@ -64,8 +69,11 @@ function GameHeader({ setupPanelRef }) {
       // Interpolate between the large hero logo and the compact navbar logo.
       const nextLogoWidth = sizeSet.largeLogoWidth
         - ((sizeSet.largeLogoWidth - sizeSet.compactLogoWidth) * nextProgress);
+      const nextHeaderHeight = sizeSet.largeHeight
+        - ((sizeSet.largeHeight - sizeSet.compactHeight) * nextProgress);
 
       setHeaderState({
+        headerHeight: nextHeaderHeight,
         logoWidth: nextLogoWidth,
         progress: nextProgress,
       });
@@ -101,6 +109,7 @@ function GameHeader({ setupPanelRef }) {
       style={{
         // CSS variables let the browser animate the logo dimensions and navbar background together.
         '--compact-progress': headerState.progress,
+        '--header-height': `${headerState.headerHeight}px`,
         '--logo-width': `${headerState.logoWidth}px`,
       }}
     >

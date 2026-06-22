@@ -103,6 +103,7 @@
 .game-header {
   /* These variables are updated by GameHeader.jsx as the setup panel moves upward. */
   --compact-progress: 0;
+  --header-height: 360px;
   --logo-width: 330px;
 
   position: sticky;
@@ -112,6 +113,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: var(--header-height);
   box-sizing: border-box;
   padding: 12px 0;
   margin-bottom: 0;
@@ -136,7 +138,7 @@
   height: auto;
   margin: 0 auto;
   /* The same centered logo shrinks into the compact navbar state. */
-  transition: width 90ms linear;
+  transition: width 120ms linear;
 }
 
 .sound-toggle {
@@ -296,6 +298,10 @@
 
   .app-panel {
     padding: 16px;
+  }
+
+  .game-header {
+    min-height: var(--header-height);
   }
 
   .game-logo {
