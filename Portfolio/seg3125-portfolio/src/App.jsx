@@ -153,7 +153,11 @@ function App() {
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Memory Game</h3>
                   <p className="card-text text-secondary">A browser-based card game with interactive rounds.</p>
-                  <button className="btn btn-outline-primary mt-auto" type="button">Coming Soon</button>
+                  <a 
+                    className="btn btn-outline-primary mt-auto"
+                    href="https://el-memory-master.netlify.app/"
+                    target="_blank"
+                    type="button">View Website</a>
                 </div>
               </div>
             </div>
