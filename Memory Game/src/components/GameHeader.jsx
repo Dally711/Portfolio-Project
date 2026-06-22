@@ -8,18 +8,14 @@ const TRANSITION_START_TRAVEL = 28;
 const TRANSITION_END_TRAVEL = 174;
 const MOBILE_BREAKPOINT = 576;
 
-// Header and logo sizes for the large centered state and compact navbar state.
+// Logo sizes for the large centered state and compact navbar state.
 const HEADER_SIZES = {
   desktop: {
-    compactHeight: 56,
-    compactLogoWidth: 108,
-    largeHeight: 172,
+    compactLogoWidth: 76,
     largeLogoWidth: 330,
   },
   mobile: {
-    compactHeight: 54,
-    compactLogoWidth: 104,
-    largeHeight: 152,
+    compactLogoWidth: 72,
     largeLogoWidth: 280,
   },
 };
@@ -29,7 +25,6 @@ function GameHeader({ setupPanelRef }) {
   // Stores the setup panel's first top position so all future scroll math is relative to the starting layout.
   const initialSetupTop = useRef(null);
   const [headerState, setHeaderState] = useState({
-    height: 172,
     logoWidth: 330,
     progress: 0,
   });
@@ -69,11 +64,8 @@ function GameHeader({ setupPanelRef }) {
       // Interpolate between the large hero logo and the compact navbar logo.
       const nextLogoWidth = sizeSet.largeLogoWidth
         - ((sizeSet.largeLogoWidth - sizeSet.compactLogoWidth) * nextProgress);
-      const nextHeaderHeight = sizeSet.largeHeight
-        - ((sizeSet.largeHeight - sizeSet.compactHeight) * nextProgress);
 
       setHeaderState({
-        height: nextHeaderHeight,
         logoWidth: nextLogoWidth,
         progress: nextProgress,
       });
@@ -109,7 +101,6 @@ function GameHeader({ setupPanelRef }) {
       style={{
         // CSS variables let the browser animate the logo dimensions and navbar background together.
         '--compact-progress': headerState.progress,
-        '--header-height': `${headerState.height}px`,
         '--logo-width': `${headerState.logoWidth}px`,
       }}
     >

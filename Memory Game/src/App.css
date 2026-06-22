@@ -103,7 +103,6 @@
 .game-header {
   /* These variables are updated by GameHeader.jsx as the setup panel moves upward. */
   --compact-progress: 0;
-  --header-height: 172px;
   --logo-width: 330px;
 
   position: sticky;
@@ -113,22 +112,19 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: var(--header-height);
+  box-sizing: border-box;
   padding: 12px 0;
   margin-bottom: 0;
+  background: #ffffff;
   isolation: isolate;
-  transition:
-    min-height 90ms linear,
-    padding 90ms linear;
 }
 
 .game-header::before {
-  /* This layer fades in the navbar background without swapping out the logo element. */
+  /* This layer adds navbar border and shadow without swapping out the logo element. */
   position: absolute;
   inset: 0 -40px;
   z-index: -1;
   border-bottom: 1px solid rgba(221, 227, 234, var(--compact-progress));
-  background: rgba(255, 255, 255, 0.96);
   box-shadow: 0 10px 28px rgba(25, 36, 50, 0.12);
   opacity: var(--compact-progress);
   content: "";
