@@ -11,14 +11,14 @@ const MOBILE_BREAKPOINT = 576;
 // Logo sizes for the large centered state and compact navbar state.
 const HEADER_SIZES = {
   desktop: {
-    compactLogoWidth: 120,
-    compactHeight: 85,
+    compactLogoWidth: 96,
+    compactHeight: 62,
     largeHeight: 360,
     largeLogoWidth: 330,
   },
   mobile: {
-    compactLogoWidth: 112,
-    compactHeight: 77,
+    compactLogoWidth: 88,
+    compactHeight: 58,
     largeHeight: 300,
     largeLogoWidth: 280,
   },

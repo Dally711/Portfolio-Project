@@ -18,7 +18,7 @@ https://meridianhealthphysiotherapy.netlify.app
 
 ## Memory Game
 
-el-memory-game.netlify.app
+https://el-memory-game.netlify.app
 
 ## E-Commerce Website
 
