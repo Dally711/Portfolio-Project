@@ -182,7 +182,7 @@ export const products = [
     image: woolCardiganImage,
     name: 'Merino Blend Cardigan',
     brand: 'Thread & Form',
-    audience: 'Men',
+    audience: 'Women',
     category: 'Knitwear',
     material: 'Merino blend',
     color: 'Cream',
