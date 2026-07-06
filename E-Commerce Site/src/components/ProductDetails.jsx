@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getProductPrice } from '../data/products'
 
 const waistSizes = ['28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '40', '42', '44']
 const unavailableWaists = ['29', '30', '31', '35', '37', '44']
@@ -18,6 +19,7 @@ export function ProductDetails({
   const [selectedLength, setSelectedLength] = useState('30')
 
   const colorSlug = selectedColor.toLowerCase().replace(' ', '-')
+  const currentPrice = getProductPrice(product)
 
   return (
     <section className="detail-page">
@@ -54,7 +56,10 @@ export function ProductDetails({
             </button>
           </div>
 
-          <p className="detail-price">${product.price}.00</p>
+          <p className="detail-price">
+            <span className={product.sale ? 'old-price' : ''}>${product.price.toFixed(2)}</span>
+            {product.sale && <span className="sale-price"> Now ${currentPrice.toFixed(2)}</span>}
+          </p>
           {product.sale && (
             <p className="detail-promo">Enjoy an extra 30% off select sale styles</p>
           )}

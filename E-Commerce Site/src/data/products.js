@@ -449,3 +449,9 @@ export const filterGroups = {
 
 // Empty filter state reused when initializing and clearing the catalog filters.
 export const initialFilters = { category: [], material: [], color: [], size: [] }
+
+// Sale pricing is shared by cards, product details, cart, and checkout totals.
+export function getProductPrice(product) {
+  if (!product.sale) return product.price
+  return Number((Math.max(product.price - 10, 1) + 0.99).toFixed(2))
+}

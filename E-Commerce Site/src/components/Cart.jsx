@@ -1,4 +1,5 @@
 import { OrderSummary } from './OrderSummary'
+import { getProductPrice } from '../data/products'
 
 // Standalone cart page sits between browsing and checkout.
 export function Cart({
@@ -32,9 +33,19 @@ export function Cart({
           <div>
             {cartItems.map((item) => (
               <div className="cart-line" key={item.id}>
-                <div>
-                  <strong>{item.product.name}</strong>
-                  <span>${item.product.price} each</span>
+                <div className="cart-product-info">
+                  <img src={item.product.image} alt={item.product.name} />
+                  <div>
+                    <strong>{item.product.name}</strong>
+                    <span className="cart-price-line">
+                      {item.product.sale && (
+                        <span className="old-price">${item.product.price.toFixed(2)}</span>
+                      )}
+                      <span className={item.product.sale ? 'sale-price' : ''}>
+                        ${getProductPrice(item.product).toFixed(2)} each
+                      </span>
+                    </span>
+                  </div>
                 </div>
                 <div className="quantity-control">
                   <button type="button" onClick={() => onQuantityChange(item.id, -1)}>

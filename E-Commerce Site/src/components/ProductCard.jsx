@@ -1,3 +1,5 @@
+import { getProductPrice } from '../data/products'
+
 // Individual catalog item with product details, favorite status, and cart action.
 export function ProductCard({
   isFavorite,
@@ -7,6 +9,7 @@ export function ProductCard({
   product,
 }) {
   const colorCount = product.colors.length
+  const currentPrice = getProductPrice(product)
 
   return (
     <article className="product-card">
@@ -53,7 +56,7 @@ export function ProductCard({
         <p className="product-price">
           <span className={product.sale ? 'old-price' : ''}>${product.price}.00</span>
           {product.sale && (
-            <span className="sale-price"> Now ${Math.max(product.price - 10, 1)}.99</span>
+            <span className="sale-price"> Now ${currentPrice.toFixed(2)}</span>
           )}
         </p>
         {product.sale && <p className="product-promo">Enjoy 30% off</p>}

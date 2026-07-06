@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import { Cart } from './components/Cart'
 import { Checkout } from './components/Checkout'
 import { Footer } from './components/Footer'
@@ -13,14 +14,12 @@ import { ProductDetails } from './components/ProductDetails'
 import { ProductFilters } from './components/ProductFilters'
 import { PromoStrip } from './components/PromoStrip'
 import { Survey } from './components/Survey'
-import { filterGroups, initialFilters, products } from './data/products'
+import { filterGroups, getProductPrice, initialFilters, products } from './data/products'
 import './App.css'
 
 // App owns the shared state for page flow, filters, cart, checkout, and survey responses.
 function App() {
-  // View state replaces a routing dependency for this small prototype.
-  const [view, setView] = useState('home')
-  const [selectedProductId, setSelectedProductId] = useState(products[0].id)
+  const routerNavigate = useNavigate()
 
   // Product exploration state for the faceted search on the Shop view.
   const [filters, setFilters] = useState(initialFilters)
@@ -40,7 +39,6 @@ function App() {
   const [survey, setSurvey] = useState({ rating: '5', comment: '' })
   const [surveySent, setSurveySent] = useState(false)
 
-  const selectedProduct = products.find((product) => product.id === selectedProductId) || products[0]
   const featuredProducts = products.filter((product) => product.featured).slice(0, 6)
   const newArrivals = products.filter((product) => product.newArrival).slice(0, 4)
   const bestSellers = products.filter((product) => product.bestSeller).slice(0, 4)
@@ -93,7 +91,10 @@ function App() {
   )
 
   // Derived order totals keep the cart and checkout summaries consistent.
-  const subtotal = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + getProductPrice(item.product) * item.quantity,
+    0,
+  )
   const shipping = subtotal > 75 || subtotal === 0 ? 0 : 8
   const total = subtotal + shipping
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -109,7 +110,17 @@ function App() {
       if (shortcut.sale || shortcut.newArrival) setSpecialFilter(shortcut)
     }
     if (nextView === 'checkout') setCheckoutStep(0)
-    setView(nextView)
+
+    const routes = {
+      cart: '/cart',
+      checkout: '/checkout',
+      favorites: '/favorites',
+      home: '/',
+      shop: '/shop',
+      survey: '/survey',
+    }
+
+    routerNavigate(routes[nextView] || '/')
   }
 
   // Open the Shop page with a text search ready to use.
@@ -117,7 +128,7 @@ function App() {
     setFilters(initialFilters)
     setSpecialFilter({})
     setPriceLimit(120)
-    setView('shop')
+    routerNavigate('/shop')
   }
 
   // Submit search from the header and show matching catalog items.
@@ -149,8 +160,7 @@ function App() {
 
   // Open a product details view before adding a product to the cart.
   function viewProduct(productId) {
-    setSelectedProductId(productId)
-    setView('product')
+    routerNavigate(`/product/${productId}`)
   }
 
   // Add a product to the cart, or increase quantity if it is already there.
@@ -209,131 +219,166 @@ function App() {
         searchQuery={searchQuery}
       />
 
-      {view === 'home' && (
-        <>
-          <Hero onNavigate={navigate} />
-          <ProductPreviewSection
-            label="Featured"
-            favoriteIds={favoriteIds}
-            onAddToCart={addToCart}
-            onNavigate={navigate}
-            onToggleFavorite={toggleFavorite}
-            onViewDetails={viewProduct}
-            products={featuredProducts}
-            title="Featured products"
-          />
-          <ProductPreviewSection
-            label="New arrivals"
-            favoriteIds={favoriteIds}
-            onAddToCart={addToCart}
-            onNavigate={navigate}
-            onToggleFavorite={toggleFavorite}
-            onViewDetails={viewProduct}
-            products={newArrivals}
-            title="New arrivals"
-          />
-          <ProductPreviewSection
-            label="Best sellers"
-            favoriteIds={favoriteIds}
-            onAddToCart={addToCart}
-            onNavigate={navigate}
-            onToggleFavorite={toggleFavorite}
-            onViewDetails={viewProduct}
-            products={bestSellers}
-            title="Best sellers"
-          />
-          <WhyShopSection />
-        </>
-      )}
-
-      {view === 'shop' && (
-        <section className="shop-layout" id="shop">
-          <ProductFilters
-            filterGroups={filterGroups}
-            filters={filters}
-            onClearFilters={clearFilters}
-            onPriceLimitChange={setPriceLimit}
-            onToggleFilter={toggleFilter}
-            priceLimit={priceLimit}
-          />
-          <ProductCatalog
-            products={shopProducts}
-            favoriteIds={favoriteIds}
-            onAddToCart={addToCart}
-            onToggleFavorite={toggleFavorite}
-            onViewDetails={viewProduct}
-            title="All products"
-          />
-        </section>
-      )}
-
-      {view === 'favorites' && (
-        <section className="favorites-page">
-          <ProductCatalog
-            products={favoriteProducts}
-            favoriteIds={favoriteIds}
-            onAddToCart={addToCart}
-            onToggleFavorite={toggleFavorite}
-            onViewDetails={viewProduct}
-            title="Favorite items"
-          />
-        </section>
-      )}
-
-      {view === 'product' && (
-        <ProductDetails
-          onAddToCart={(productId, quantity) => {
-            addToCart(productId, quantity)
-            setView('cart')
-          }}
-          isFavorite={favoriteIds.includes(selectedProduct.id)}
-          onBackToShop={() => navigate('shop')}
-          onToggleFavorite={toggleFavorite}
-          product={selectedProduct}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero onNavigate={navigate} />
+              <ProductPreviewSection
+                label="Featured"
+                favoriteIds={favoriteIds}
+                onAddToCart={addToCart}
+                onNavigate={navigate}
+                onToggleFavorite={toggleFavorite}
+                onViewDetails={viewProduct}
+                products={featuredProducts}
+                title="Featured products"
+              />
+              <ProductPreviewSection
+                label="New arrivals"
+                favoriteIds={favoriteIds}
+                onAddToCart={addToCart}
+                onNavigate={navigate}
+                onToggleFavorite={toggleFavorite}
+                onViewDetails={viewProduct}
+                products={newArrivals}
+                title="New arrivals"
+              />
+              <ProductPreviewSection
+                label="Best sellers"
+                favoriteIds={favoriteIds}
+                onAddToCart={addToCart}
+                onNavigate={navigate}
+                onToggleFavorite={toggleFavorite}
+                onViewDetails={viewProduct}
+                products={bestSellers}
+                title="Best sellers"
+              />
+              <WhyShopSection />
+            </>
+          }
         />
-      )}
-
-      {view === 'cart' && (
-        <Cart
-          cartItems={cartItems}
-          onCheckout={() => navigate('checkout')}
-          onQuantityChange={updateQuantity}
-          onShop={() => navigate('shop')}
-          shipping={shipping}
-          subtotal={subtotal}
-          total={total}
+        <Route
+          path="/shop"
+          element={
+            <section className="shop-layout" id="shop">
+              <ProductFilters
+                filterGroups={filterGroups}
+                filters={filters}
+                onClearFilters={clearFilters}
+                onPriceLimitChange={setPriceLimit}
+                onToggleFilter={toggleFilter}
+                priceLimit={priceLimit}
+              />
+              <ProductCatalog
+                products={shopProducts}
+                favoriteIds={favoriteIds}
+                onAddToCart={addToCart}
+                onToggleFavorite={toggleFavorite}
+                onViewDetails={viewProduct}
+                title="All products"
+              />
+            </section>
+          }
         />
-      )}
-
-      {view === 'checkout' && (
-        <Checkout
-          cartItems={cartItems}
-          checkoutStep={checkoutStep}
-          details={details}
-          onDetailsChange={setDetails}
-          onPaymentChange={setPayment}
-          onPlaceOrder={placeOrder}
-          onStepChange={setCheckoutStep}
-          onSurvey={() => setView('survey')}
-          orderPlaced={orderPlaced}
-          payment={payment}
-          shipping={shipping}
-          subtotal={subtotal}
-          total={total}
+        <Route
+          path="/favorites"
+          element={
+            <section className="favorites-page">
+              <ProductCatalog
+                products={favoriteProducts}
+                favoriteIds={favoriteIds}
+                onAddToCart={addToCart}
+                onToggleFavorite={toggleFavorite}
+                onViewDetails={viewProduct}
+                title="Favorite items"
+              />
+            </section>
+          }
         />
-      )}
-
-      {view === 'survey' && (
-        <Survey
-          onSurveyChange={setSurvey}
-          onSurveySubmit={() => setSurveySent(true)}
-          survey={survey}
-          surveySent={surveySent}
+        <Route
+          path="/product/:productId"
+          element={
+            <ProductRoute
+              favoriteIds={favoriteIds}
+              onAddToCart={(productId, quantity) => {
+                addToCart(productId, quantity)
+                routerNavigate('/cart')
+              }}
+              onBackToShop={() => navigate('shop')}
+              onToggleFavorite={toggleFavorite}
+            />
+          }
         />
-      )}
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cartItems={cartItems}
+              onCheckout={() => navigate('checkout')}
+              onQuantityChange={updateQuantity}
+              onShop={() => navigate('shop')}
+              shipping={shipping}
+              subtotal={subtotal}
+              total={total}
+            />
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              cartItems={cartItems}
+              checkoutStep={checkoutStep}
+              details={details}
+              onDetailsChange={setDetails}
+              onPaymentChange={setPayment}
+              onPlaceOrder={placeOrder}
+              onStepChange={setCheckoutStep}
+              onSurvey={() => routerNavigate('/survey')}
+              orderPlaced={orderPlaced}
+              payment={payment}
+              shipping={shipping}
+              subtotal={subtotal}
+              total={total}
+            />
+          }
+        />
+        <Route
+          path="/survey"
+          element={
+            <Survey
+              onSurveyChange={setSurvey}
+              onSurveySubmit={() => setSurveySent(true)}
+              survey={survey}
+              surveySent={surveySent}
+            />
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
 
       <Footer onNavigate={navigate} />
     </main>
+  )
+}
+
+// Route-aware product page reads the selected product from the URL.
+function ProductRoute({ favoriteIds, onAddToCart, onBackToShop, onToggleFavorite }) {
+  const { productId } = useParams()
+  const product = products.find((item) => item.id === productId)
+
+  if (!product) return <Navigate to="/shop" replace />
+
+  return (
+    <ProductDetails
+      isFavorite={favoriteIds.includes(product.id)}
+      onAddToCart={onAddToCart}
+      onBackToShop={onBackToShop}
+      onToggleFavorite={onToggleFavorite}
+      product={product}
+    />
   )
 }
 
