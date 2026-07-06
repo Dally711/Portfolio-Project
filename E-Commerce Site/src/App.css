@@ -911,9 +911,19 @@ form label,
   font-size: 12px;
 }
 
-.product-price span,
+.product-price .sale-price,
 .product-promo {
   color: #9a4b18;
+}
+
+.old-price {
+  color: #3a3733;
+}
+
+.product-price .old-price {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
 }
 
 .product-promo {

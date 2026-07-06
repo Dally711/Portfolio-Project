@@ -51,8 +51,10 @@ export function ProductCard({
         </div>
         <p className="product-brand">{product.brand}</p>
         <p className="product-price">
-          ${product.price}.00
-          {product.sale && <span> Select colors ${Math.max(product.price - 10, 1)}.99</span>}
+          <span className={product.sale ? 'old-price' : ''}>${product.price}.00</span>
+          {product.sale && (
+            <span className="sale-price"> Now ${Math.max(product.price - 10, 1)}.99</span>
+          )}
         </p>
         {product.sale && <p className="product-promo">Enjoy 30% off</p>}
         <p className="product-color-count">
