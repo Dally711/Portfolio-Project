@@ -1,0 +1,59 @@
+:root {
+  /* Shared font tokens used across the whole app. */
+  --font-body:
+    'Harmonia Sans Cyrillic Semi Bold', 'Harmonia Sans', 'Avenir Next', Avenir,
+    'Helvetica Neue', Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    Didot, 'Bodoni 72', 'Bodoni MT', 'Times New Roman', Georgia, serif;
+  --font-button:
+    'Futura Std Small Caps Medium', 'Futura Std', Futura, 'Century Gothic',
+    'Trebuchet MS', 'Avenir Next', Avenir, Arial, ui-sans-serif, system-ui,
+    sans-serif;
+
+  font-family:
+    var(--font-body);
+  color: #111;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Keep element sizing predictable across components. */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling supports the header anchor links. */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+/* Shared transition behavior for interactive elements. */
+button,
+a,
+input,
+textarea,
+select {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+/* Visible keyboard focus state for accessibility. */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(17, 17, 17, 0.28);
+  outline-offset: 2px;
+}
