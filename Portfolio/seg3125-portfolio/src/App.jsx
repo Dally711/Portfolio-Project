@@ -172,11 +172,11 @@ function App() {
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">E-commerce Site</h3>
                   <p className="card-text text-secondary">A shopping site with product listings and cart flow.</p>
-                  <button 
+                  <a 
                   className="btn btn-outline-primary mt-auto"
                   href="https://thread-and-form.netlify.app/"
                   target="_blank"
-                  type="button">View Website</button>
+                  type="button">View Website</a>
                 </div>
               </div>
             </div>
