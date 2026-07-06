@@ -95,7 +95,7 @@ function App() {
     (sum, item) => sum + getProductPrice(item.product) * item.quantity,
     0,
   )
-  const shipping = subtotal > 75 || subtotal === 0 ? 0 : 8
+  const shipping = subtotal > 65 || subtotal === 0 ? 0 : 8
   const total = subtotal + shipping
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 

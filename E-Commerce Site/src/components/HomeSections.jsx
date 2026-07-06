@@ -74,7 +74,7 @@ export function ProductPreviewSection({
 // Trust signals commonly shown on clothing retail homepages.
 export function WhyShopSection() {
   const benefits = [
-    ['Free shipping', 'On orders over $75'],
+    ['Free shipping', 'On orders over $65'],
     ['Easy returns', 'Exchange sizes within 30 days'],
     ['Secure checkout', 'Prototype payment flow with clear steps'],
     ['Premium quality', 'Material notes on every product'],
