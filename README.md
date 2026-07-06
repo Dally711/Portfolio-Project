@@ -22,7 +22,7 @@ https://el-memory-game.netlify.app
 
 ## E-Commerce Website
 
-Coming Soon
+https://thread-and-form.netlify.app/
 
 ## Analytics Website
 
@@ -108,7 +108,7 @@ Robert suffers from chronic back pain and visits the website to learn how physio
 
 ### Status
 
-In Progress
+Complete
 
 ### Overview
 
@@ -148,11 +148,41 @@ The objective of this project is to design an engaging game that helps users pra
 
 ### Status
 
-Coming Soon
+Complete
 
 ### Overview
 
-Coming Soon
+Thread & Form is a high-fidelity e-commerce prototype created for Assignment 4. The site focuses on clothing, accessories, kids/baby items, and home essentials with a clean high-end retail style inspired by modern fashion websites.
+
+The prototype supports the required shopping flow from product browsing to cart, checkout, confirmation, and post-shopping survey. It also includes a functional faceted search so users can narrow products by category, material, color, size, and price.
+
+### Key Features
+
+* Featured products, new arrivals, and best sellers
+* Full product catalog with faceted search
+* Product detail pages with color and size choices
+* Favorites page
+* Cart with product images, sale pricing, and quantity controls
+* Checkout flow with shipping, payment, and confirmation steps
+* Post-checkout survey
+* Responsive navigation with search, cart, and menu controls
+
+### Design Focus
+
+* System image and shopping flow clarity
+* Faceted search for divergent and convergent exploration
+* Verbal communication for promotion, product information, and survey engagement
+* Usability heuristics
+* Minimalist high-end clothing retail visual design
+
+### Technologies
+
+* React
+* React Router
+* JavaScript
+* HTML5
+* CSS3
+* Vite
 
 ---
 
@@ -252,7 +282,7 @@ Through these projects, I have gained experience in:
 | Portfolio Website                     | Complete    |
 | Meridian Health Physiotherapy Website | Complete    |
 | Memory Game                           | In Progress |
-| E-Commerce Website                    | Coming Soon |
+| E-Commerce Website                    | Complete    |
 | Analytics Website                     | Coming Soon |
 
 ---
