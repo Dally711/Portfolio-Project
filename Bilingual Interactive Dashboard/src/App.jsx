@@ -140,7 +140,7 @@ export default function App() {
 
             {loadError ? <StatusCard title={copy.errorTitle}><button className="btn reset-button" onClick={() => { setLoadError(''); setLoadedMetric(''); setRetryVersion((value) => value + 1) }}>{copy.retry}</button></StatusCard>
               : loading ? <StatusCard title={copy.loading} loading /> : <>
-                <section className="dashboard-section chart-section" aria-labelledby="line-chart-title">
+                <section id="trends" className="dashboard-section chart-section" aria-labelledby="line-chart-title">
                   <ChartHeading eyebrow={copy.lineEyebrow} title={`${copy.lineTitle}: ${copy[dataMetric]}`} text={`${selectedCategory} · ${geography} · ${formatDate(selectedStart, language)}–${formatDate(selectedEnd, language)}`} source={copy.source} />
                   {explainer && <article className="measure-explainer chart-explainer"><span aria-hidden="true">i</span><div><strong>{explainer.title}</strong><p>{explainer.text}</p></div></article>}
                   <div className="chart-with-stats">
@@ -162,7 +162,7 @@ export default function App() {
                   </div>
                 </section>
 
-                <section className="dashboard-section chart-section" aria-labelledby="bar-chart-title">
+                <section id="regions" className="dashboard-section chart-section" aria-labelledby="bar-chart-title">
                   <div className="section-intro align-items-end">
                     <div><p className="eyebrow">{copy.barEyebrow}</p><h2 id="bar-chart-title">{copy.barTitle}: {copy[dataMetric]}</h2><p>{copy.barText}</p></div>
                     <div className="sort-control"><label className="form-label" htmlFor="bar-sort">{copy.sort}</label><select className="form-select" id="bar-sort" value={sortOrder} onChange={(event) => setSortOrder(event.target.value)}><option value="desc">{copy.descending}</option><option value="asc">{copy.ascending}</option></select></div>
@@ -180,24 +180,24 @@ export default function App() {
                   </div>
                 </section>
 
-                <section className="dashboard-section insights-section" aria-labelledby="insights-title">
+                <section id="insights" className="dashboard-section insights-section" aria-labelledby="insights-title">
                   <div className="section-intro"><div><p className="eyebrow">{copy.insightsEyebrow}</p><h2 id="insights-title">{copy.insightsTitle}</h2></div></div>
                   <div className="row g-3">
                     <Insight number="01" title={copy.insightLatestTitle} text={summary ? fill(copy.insightLatest, { value: displayValue(summary.value), period: formatDate(summary.date, language) }) : copy.noData} />
-                    <Insight number="02" title={copy.insightChangeTitle} text={changeInsight(summary, copy, displayValue)} />
+                    <Insight number="02" title={copy.insightChangeTitle} text={changeInsight(summary, copy, displayValue, language)} />
                     <Insight number="03" title={copy.insightRangeTitle} text={fill(copy.insightRange, { count: visibleSeries.length })} />
                   </div>
                 </section>
               </>}
 
-            <section className="dashboard-section about-data card border-0" aria-labelledby="about-title">
+            <section id="about" className="dashboard-section about-data card border-0" aria-labelledby="about-title">
               <div><p className="eyebrow">{copy.aboutEyebrow}</p><h2 id="about-title">{copy.aboutTitle}</h2></div>
-              <div className="about-copy"><p>{copy.aboutText}</p><p>{copy.averageNote}</p><p>{copy.updatedNote}</p><p className="project-note">{copy.projectNote}</p></div>
+              <div className="about-copy"><p>{copy.aboutText}</p><p>{copy.averageNote}</p><p>{copy.updatedNote}</p></div>
             </section>
           </div>
         </div>
       </main>
-      <footer className="dashboard-footer"><div className="container-xl d-flex flex-column flex-sm-row justify-content-between gap-2"><strong>{copy.footer}</strong><span>{copy.studentProject}</span></div></footer>
+      <footer className="dashboard-footer"><div className="container-xl d-flex flex-column flex-sm-row justify-content-between gap-2"><strong>{copy.footer}</strong><span>{copy.footerSource}</span></div></footer>
     </div>
   )
 }
@@ -225,10 +225,15 @@ function ChangeUnitToggle({ copy, unitLabel, value, onChange }) {
   </button>
 }
 
-function changeInsight(summary, copy, format) {
-  if (!summary || !Number.isFinite(summary.change)) return copy.noData
-  if (summary.change === 0) return copy.insightChangeFlat
-  return fill(summary.change > 0 ? copy.insightChangeUp : copy.insightChangeDown, { change: format(Math.abs(summary.change)) })
+function changeInsight(summary, copy, format, language) {
+  if (!summary || !Number.isFinite(summary.change) || !summary.previousDate) return copy.noData
+  // Naming both periods and values makes the comparison understandable without chart inspection.
+  const values = {
+    change: format(Math.abs(summary.change)), previousValue: format(summary.previousValue), value: format(summary.value),
+    previousPeriod: formatDate(summary.previousDate, language), period: formatDate(summary.date, language),
+  }
+  if (summary.change === 0) return fill(copy.insightChangeFlat, values)
+  return fill(summary.change > 0 ? copy.insightChangeUp : copy.insightChangeDown, values)
 }
 
 function buildMeasureExplainer(metric, summary, copy, language) {

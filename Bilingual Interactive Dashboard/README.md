@@ -1,6 +1,6 @@
 # Bilingual Interactive Dashboard
 
-A focused single-page React dashboard for SEG 3125 Assignment 5. It explores Canadian grocery prices, inflation, housing, rent, and gas prices through two required chart types.
+A focused single-page React dashboard for exploring Canadian grocery prices, inflation, housing, rent, and gas prices through interactive visualizations.
 
 ## Run locally
 

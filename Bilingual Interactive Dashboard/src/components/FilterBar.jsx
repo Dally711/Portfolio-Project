@@ -56,7 +56,7 @@ export default function FilterBar({ copy, metric, setMetric, housingView, setHou
 }
 
 function SearchControl({ id, label, placeholder, value, onChange, count, copy }) {
-  return <div className="col-12 col-sm-6 col-xl">
+  return <div className="col-12 col-sm-6 col-xl filter-search-control">
     <label className="form-label" htmlFor={id}>{label}</label>
     <input className="form-control filter-search" id={id} type="search" value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} />
     <small className="filter-match-count" aria-live="polite">{count} {copy.matches}</small>

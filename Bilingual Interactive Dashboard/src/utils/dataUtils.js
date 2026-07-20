@@ -76,6 +76,7 @@ export function latestAndChange(series, config) {
   const previousValue = previous ? safeNumber(previous[config.value]) : null
   return {
     value, date: String(latest[config.date]), unit: latest[config.unit],
+    previousValue, previousDate: previous ? String(previous[config.date]) : null,
     change: previousValue === null ? null : value - previousValue,
     percentChange: previousValue ? ((value - previousValue) / previousValue) * 100 : null,
   }
