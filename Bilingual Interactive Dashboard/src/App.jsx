@@ -183,9 +183,9 @@ export default function App() {
                 <section className="dashboard-section insights-section" aria-labelledby="insights-title">
                   <div className="section-intro"><div><p className="eyebrow">{copy.insightsEyebrow}</p><h2 id="insights-title">{copy.insightsTitle}</h2></div></div>
                   <div className="row g-3">
-                    <Insight number="01" text={summary ? fill(copy.insightLatest, { value: displayValue(summary.value), period: formatDate(summary.date, language) }) : copy.noData} />
-                    <Insight number="02" text={changeInsight(summary, copy, displayValue)} />
-                    <Insight number="03" text={fill(copy.insightRange, { count: visibleSeries.length })} />
+                    <Insight number="01" title={copy.insightLatestTitle} text={summary ? fill(copy.insightLatest, { value: displayValue(summary.value), period: formatDate(summary.date, language) }) : copy.noData} />
+                    <Insight number="02" title={copy.insightChangeTitle} text={changeInsight(summary, copy, displayValue)} />
+                    <Insight number="03" title={copy.insightRangeTitle} text={fill(copy.insightRange, { count: visibleSeries.length })} />
                   </div>
                 </section>
               </>}
@@ -211,14 +211,18 @@ function StatusCard({ title, children, loading = false }) {
 }
 
 function EmptyState({ text }) { return <div className="empty-state" role="status">{text}</div> }
-function Insight({ number, text }) { return <div className="col-md-4"><article className="insight-card card border-0 h-100"><span>{number}</span><p>{text}</p></article></div> }
+function Insight({ number, title, text }) {
+  return <div className="col-md-4"><article className="insight-card card border-0 h-100"><div className="insight-card-heading"><span>{number}</span><h3>{title}</h3></div><p>{text}</p></article></div>
+}
 
 function ChangeUnitToggle({ copy, unitLabel, value, onChange }) {
   // One shared control keeps monthly and yearly change cards in the same unit.
-  return <div className="change-unit-control"><span>{copy.changeDisplayLabel}</span><div role="group" aria-label={copy.changeDisplay}>
-    <button type="button" className={value === 'value' ? 'active' : ''} aria-pressed={value === 'value'} onClick={() => onChange('value')}>{unitLabel}</button>
-    <button type="button" className={value === 'percentage' ? 'active' : ''} aria-pressed={value === 'percentage'} onClick={() => onChange('percentage')}>%</button>
-  </div></div>
+  const nextValue = value === 'value' ? 'percentage' : 'value'
+  return <button type="button" className="change-unit-control" aria-label={copy.changeDisplay} onClick={() => onChange(nextValue)}>
+    <span>{copy.changeDisplayLabel}</span><span className="unit-switch" aria-hidden="true">
+      <span className={value === 'value' ? 'active' : ''}>{unitLabel}</span><span className={value === 'percentage' ? 'active' : ''}>%</span>
+    </span>
+  </button>
 }
 
 function changeInsight(summary, copy, format) {
