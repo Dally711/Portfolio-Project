@@ -1,16 +1,36 @@
-# React + Vite
+# Housing & Cost of Living Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A bilingual React dashboard for exploring local Statistics Canada CSV datasets covering grocery prices, inflation, house prices, rental markets, and gas prices.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Open the local URL printed by Vite. To create a production build:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+```
 
-## Expanding the ESLint configuration
+## Data
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The application reads these files from `public/data/` in the browser:
+
+- `grocery-prices.csv`
+- `inflation.csv`
+- `housing.csv`
+- `rent-data.csv`
+- `gas.csv`
+
+The Housing page contains separate House Prices and Rental Market views. Each CSV is fetched only when its corresponding page or subsection is first opened, and parsed data is cached in memory for the rest of the browser session. Rent remains part of Housing rather than becoming a fifth main dashboard category.
+
+## Main libraries
+
+- React and Vite
+- Papa Parse
+- Chart.js and react-chartjs-2
+
+No backend or Statistics Canada API is used.
