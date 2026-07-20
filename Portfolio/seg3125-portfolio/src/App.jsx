@@ -130,7 +130,7 @@ function App() {
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Service Site</h3>
-                  <p className="card-text text-secondary">A business website for booking and service information.</p>
+                  <p className="card-text text-secondary">A physiotherapy website with service information and online booking.</p>
                   <a
                     className="btn btn-outline-primary mt-auto"
                     href="https://meridianhealthphysiotherapy.netlify.app/"
@@ -152,7 +152,7 @@ function App() {
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Memory Game</h3>
-                  <p className="card-text text-secondary">A browser-based card game with interactive rounds.</p>
+                  <p className="card-text text-secondary">A sequence-memory game with multiple modes and score tracking.</p>
                   <a 
                     className="btn btn-outline-primary mt-auto"
                     href="https://el-memory-master.netlify.app/"
@@ -171,7 +171,7 @@ function App() {
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">E-commerce Site</h3>
-                  <p className="card-text text-secondary">A shopping site with product listings and cart flow.</p>
+                  <p className="card-text text-secondary">A fashion storefront with product filters, a cart and checkout.</p>
                   <a 
                   className="btn btn-outline-primary mt-auto"
                   href="https://thread-and-form.netlify.app/"
@@ -190,7 +190,7 @@ function App() {
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Analytics Dashboard</h3>
-                  <p className="card-text text-secondary">A bilingual dashboard for exploring Canadian cost-of-living trends.</p>
+                  <p className="card-text text-secondary">A bilingual dashboard for Canadian cost-of-living trends.</p>
                   <a
                     className="btn btn-outline-primary mt-auto"
                     href="https://living-cost-canada.netlify.app/"
