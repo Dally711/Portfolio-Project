@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import './App.css'
 import analyticsImage from './assets/case studies/living-cost-logo.png'
 import ecommerceImage from './assets/case studies/thread-and-form-logo.png'
+import ecommerceImage2 from './assets/case studies/thread-form-logo.png'
 import memoryGameImage from './assets/case studies/memory-master-logo.png'
 import serviceSiteImage from './assets/case studies/meridian-logo-colour.png'
 import webDevelopmentIcon from './assets/web-development.svg'
@@ -166,7 +167,7 @@ function App() {
               <div className="card project-card h-100 shadow-sm">
                 <img
                   className="card-img-top project-card-image"
-                  src={ecommerceImage}
+                  src={ecommerceImage2}
                   alt="Thread and Form logo"
                 />
                 <div className="card-body d-flex flex-column">
