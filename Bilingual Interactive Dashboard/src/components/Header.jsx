@@ -9,7 +9,8 @@ export default function Header({ language, onLanguageChange, links, copy }) {
     <header className="site-header">
       <Link className="wordmark" to="/" onClick={closeMenu} aria-label={copy.homeLabel}>
         <span className="wordmark-mark" aria-hidden="true">⌁</span>
-        <span>Living<span>Costs</span></span>
+        {/* Public assets are served from the site root by Vite. */}
+        <img className="navbar-logo" src="/images/logo-living-cost.png" alt="" />
       </Link>
 
       <button
