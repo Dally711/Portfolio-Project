@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { metricOrder } from '../data/datasetConfig'
 
-export default function FilterBar({ copy, metric, setMetric, housingView, setHousingView, geography, setGeography, category, setCategory, structure, setStructure, startDate, setStartDate, endDate, setEndDate, geographyOptions, categoryOptions, structureOptions, dateOptions, formatDateOption, onReset }) {
+export default function FilterBar({ copy, metric, setMetric, housingView, setHousingView, geography, setGeography, category, setCategory, structure, setStructure, startDate, setStartDate, endDate, setEndDate, geographyOptions, categoryOptions, structureOptions, dateOptions, formatDateOption, formatGeographyOption, formatCategoryOption, onReset }) {
   const [productSearch, setProductSearch] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
 
@@ -36,9 +36,9 @@ export default function FilterBar({ copy, metric, setMetric, housingView, setHou
       <div className="row g-3 align-items-end">
         <SelectControl id="metric" label={copy.metric} value={metric} onChange={handleMetricSelection} options={metricOrder} getLabel={(option) => copy[option]} />
         {metric === 'housing' && housingView === 'rent' && <SearchControl id="location-search" label={copy.searchLocation} placeholder={copy.searchLocationPlaceholder} value={locationSearch} onChange={setLocationSearch} count={locationMatchCount} copy={copy} />}
-        <SelectControl id="geography" label={copy.geography} value={geography} onChange={setGeography} options={metric === 'housing' && housingView === 'rent' ? searchedGeographies : geographyOptions} wide />
+        <SelectControl id="geography" label={copy.geography} value={geography} onChange={setGeography} options={metric === 'housing' && housingView === 'rent' ? searchedGeographies : geographyOptions} getLabel={formatGeographyOption} wide />
         {metric === 'grocery' && <SearchControl id="product-search" label={copy.searchProduct} placeholder={copy.searchProductPlaceholder} value={productSearch} onChange={setProductSearch} count={productMatchCount} copy={copy} />}
-        <SelectControl id="category" label={copy.category} value={category} onChange={setCategory} options={metric === 'grocery' ? searchedCategories : categoryOptions} wide />
+        <SelectControl id="category" label={copy.category} value={category} onChange={setCategory} options={metric === 'grocery' ? searchedCategories : categoryOptions} getLabel={formatCategoryOption} wide />
         {metric === 'housing' && housingView === 'rent' && <SelectControl id="structure" label={copy.structure} value={structure} onChange={setStructure} options={structureOptions} wide />}
         <SelectControl id="from" label={copy.from} value={startDate} onChange={setStartDate} options={dateOptions.filter((date) => !endDate || date <= endDate)} getLabel={formatDateOption} />
         <SelectControl id="to" label={copy.to} value={endDate} onChange={setEndDate} options={dateOptions.filter((date) => !startDate || date >= startDate)} getLabel={formatDateOption} />

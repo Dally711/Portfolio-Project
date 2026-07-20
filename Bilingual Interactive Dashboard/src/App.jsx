@@ -9,6 +9,7 @@ import StatCard from './components/StatCard'
 import { loaders } from './data/dataService'
 import { datasetConfigs } from './data/datasetConfig'
 import { translations } from './data/translations'
+import { translateDataValue } from './data/valueTranslations'
 import {
   averagePeriodChanges, buildRegionalComparison, buildSeries, filterSeriesByDate, formatDate, formatPercent,
   formatValue, latestAndChange, pinFirst, safeNumber, unique,
@@ -74,7 +75,9 @@ export default function App() {
   const averageChanges = useMemo(() => averagePeriodChanges(visibleSeries, config), [visibleSeries, config])
   const regionalData = useMemo(() => buildRegionalComparison(rows, config, selectedCategory, selectedStructure, selectedEnd), [rows, config, selectedCategory, selectedStructure, selectedEnd])
   const sortedBars = useMemo(() => [...regionalData].sort((a, b) => sortOrder === 'desc' ? b.value - a.value : a.value - b.value), [regionalData, sortOrder])
-  const metricLabel = `${copy[dataMetric]} · ${selectedCategory}`
+  const displayCategory = translateDataValue(dataMetric, 'category', selectedCategory, language)
+  const displayGeography = translateDataValue(dataMetric, 'geography', geography, language)
+  const metricLabel = `${copy[dataMetric]} · ${displayCategory}`
   const unitLabel = copy[`${dataMetric}Unit`]
   const displayValue = (value, signed = false) => formatValue(value, config, language, signed)
 
@@ -90,16 +93,15 @@ export default function App() {
   }
 
   const lineSummary = summary ? fill(copy.chartSummary, {
-    metric: copy[dataMetric], geography, count: visibleSeries.length,
+    metric: copy[dataMetric], geography: displayGeography, count: visibleSeries.length,
     from: formatDate(selectedStart, language), to: formatDate(selectedEnd, language), value: displayValue(summary.value),
   }) : copy.noData
   const highestBar = regionalData.length ? [...regionalData].sort((a, b) => b.value - a.value)[0] : null
   const barSummary = highestBar ? fill(copy.barSummary, {
-    metric: copy[dataMetric], count: regionalData.length, highest: highestBar.region, value: displayValue(highestBar.value),
+    metric: copy[dataMetric], count: regionalData.length, highest: translateDataValue(dataMetric, 'geography', highestBar.region, language), value: displayValue(highestBar.value),
   }) : copy.noData
 
   // These summaries keep the most useful values beside their related diagrams.
-  const latestDetail = summary ? `${formatDate(summary.date, language)} · ${geography}` : copy.noData
   const comparisonDate = selectedEnd ? formatDate(selectedEnd, language) : copy.unavailable
   const explainer = buildMeasureExplainer(dataMetric, summary, copy, language)
   const isRent = dataMetric === 'rent'
@@ -135,13 +137,15 @@ export default function App() {
                 startDate={selectedStart} setStartDate={setStartDate} endDate={selectedEnd} setEndDate={setEndDate}
                 geographyOptions={geographyOptions} categoryOptions={pinFirst(categoryOptions, config.preferredCategory)}
                 structureOptions={pinFirst(structureOptions, config.preferredStructure)} dateOptions={dateOptions}
-                formatDateOption={(date) => formatDate(date, language)} onReset={resetFilters} />
+                formatDateOption={(date) => formatDate(date, language)}
+                formatGeographyOption={(value) => translateDataValue(dataMetric, 'geography', value, language)}
+                formatCategoryOption={(value) => translateDataValue(dataMetric, 'category', value, language)} onReset={resetFilters} />
             </section>
 
             {loadError ? <StatusCard title={copy.errorTitle}><button className="btn reset-button" onClick={() => { setLoadError(''); setLoadedMetric(''); setRetryVersion((value) => value + 1) }}>{copy.retry}</button></StatusCard>
               : loading ? <StatusCard title={copy.loading} loading /> : <>
                 <section id="trends" className="dashboard-section chart-section" aria-labelledby="line-chart-title">
-                  <ChartHeading eyebrow={copy.lineEyebrow} title={`${copy.lineTitle}: ${copy[dataMetric]}`} text={`${selectedCategory} · ${geography} · ${formatDate(selectedStart, language)}–${formatDate(selectedEnd, language)}`} />
+                  <ChartHeading eyebrow={copy.lineEyebrow} title={`${copy.lineTitle}: ${copy[dataMetric]}`} text={`${displayCategory} · ${displayGeography} · ${formatDate(selectedStart, language)}–${formatDate(selectedEnd, language)}`} />
                   {explainer && <article className="measure-explainer chart-explainer"><span aria-hidden="true">i</span><div><strong>{explainer.title}</strong><p>{explainer.text}</p></div></article>}
                   <div className="chart-with-stats">
                     <div className="chart-card card border-0">
@@ -151,7 +155,7 @@ export default function App() {
                     </div>
                     <aside className="chart-stat-rail" aria-label={copy.lineStats}>
                       <ChangeUnitToggle copy={copy} unitLabel={absoluteUnitLabel} value={monthlyChangeDisplay} onChange={setMonthlyChangeDisplay} />
-                      <StatCard label={isRent ? copy.averageMonthlyRent : copy.latest} value={summary ? displayValue(summary.value) : copy.unavailable} detail={latestDetail} />
+                      <StatCard label={isRent ? copy.averageMonthlyRent : copy.latest} value={summary ? displayValue(summary.value) : copy.unavailable} detail={summary ? `${formatDate(summary.date, language)} · ${displayGeography}` : copy.noData} />
                       <StatCard label={copy.averageMonthlyChange}
                         value={monthlyChangeDisplay === 'value' ? displayValue(absoluteMonthlyChange, true) : formatPercent(percentageMonthlyChange, language)}
                         detail={monthlyChangeCount ? (isRent ? copy.estimatedMonthlyRentDetail : copy.averageMonthlyToggleDetail) : (isRent ? copy.notEnoughYearlyData : copy.notEnoughMonthlyData)} />
@@ -169,12 +173,12 @@ export default function App() {
                   </div>
                   <div className="chart-with-stats">
                     <div className="chart-card card border-0">
-                      {sortedBars.length ? <div className="bar-chart-wrap"><BarChart labels={sortedBars.map((item) => item.region)} values={sortedBars.map((item) => item.value)} label={metricLabel} color={config.color} locale={locale} formatValue={displayValue} xTitle={unitLabel} ariaLabel={barSummary} /></div> : <EmptyState text={copy.noData} />}
+                      {sortedBars.length ? <div className="bar-chart-wrap"><BarChart labels={sortedBars.map((item) => translateDataValue(dataMetric, 'geography', item.region, language))} values={sortedBars.map((item) => item.value)} label={metricLabel} color={config.color} locale={locale} formatValue={displayValue} xTitle={unitLabel} ariaLabel={barSummary} /></div> : <EmptyState text={copy.noData} />}
                       <p className="chart-meta">{copy.source}</p><p className="visually-hidden">{barSummary}</p>
                     </div>
                     <aside className="chart-stat-rail" aria-label={copy.barStats}>
-                      <StatCard label={copy.highestRegion} value={highestBar?.region ?? copy.unavailable} detail={highestBar ? displayValue(highestBar.value) : copy.noData} />
-                      <StatCard label={copy.regionsCompared} value={regionalData.length.toLocaleString(locale)} detail={selectedCategory} />
+                      <StatCard label={copy.highestRegion} value={highestBar ? translateDataValue(dataMetric, 'geography', highestBar.region, language) : copy.unavailable} detail={highestBar ? displayValue(highestBar.value) : copy.noData} />
+                      <StatCard label={copy.regionsCompared} value={regionalData.length.toLocaleString(locale)} detail={displayCategory} />
                       <StatCard label={copy.asOf} value={comparisonDate} detail={copy.latestRegionalValues} />
                     </aside>
                   </div>
