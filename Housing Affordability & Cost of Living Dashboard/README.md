@@ -1,4 +1,4 @@
-# Housing & Cost of Living Dashboard
+# Housing Affordability & Cost of Living Dashboard
 
 A bilingual React dashboard for exploring local Statistics Canada CSV datasets covering grocery prices, inflation, house prices, rental markets, and gas prices.
 
