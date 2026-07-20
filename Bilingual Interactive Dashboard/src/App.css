@@ -62,7 +62,6 @@ h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -.045em; }
 .section-intro > div:first-child { max-width: 850px; }
 .section-intro h2, .about-data h2 { margin: 0 0 .6rem; font-size: clamp(2.3rem, 5vw, 4.5rem); line-height: .98; }
 .section-intro p:not(.eyebrow), .about-copy p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.7; }
-.source-badge { flex: 0 0 auto; padding: .55rem .8rem; border: 1px solid var(--line); border-radius: 999px; color: var(--green); background: var(--paper); font-size: .68rem; font-weight: 700; }
 
 .hero-indicators { padding: 1.25rem; }
 .hero-indicators-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }

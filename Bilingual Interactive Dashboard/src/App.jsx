@@ -141,7 +141,7 @@ export default function App() {
             {loadError ? <StatusCard title={copy.errorTitle}><button className="btn reset-button" onClick={() => { setLoadError(''); setLoadedMetric(''); setRetryVersion((value) => value + 1) }}>{copy.retry}</button></StatusCard>
               : loading ? <StatusCard title={copy.loading} loading /> : <>
                 <section id="trends" className="dashboard-section chart-section" aria-labelledby="line-chart-title">
-                  <ChartHeading eyebrow={copy.lineEyebrow} title={`${copy.lineTitle}: ${copy[dataMetric]}`} text={`${selectedCategory} · ${geography} · ${formatDate(selectedStart, language)}–${formatDate(selectedEnd, language)}`} source={copy.source} />
+                  <ChartHeading eyebrow={copy.lineEyebrow} title={`${copy.lineTitle}: ${copy[dataMetric]}`} text={`${selectedCategory} · ${geography} · ${formatDate(selectedStart, language)}–${formatDate(selectedEnd, language)}`} />
                   {explainer && <article className="measure-explainer chart-explainer"><span aria-hidden="true">i</span><div><strong>{explainer.title}</strong><p>{explainer.text}</p></div></article>}
                   <div className="chart-with-stats">
                     <div className="chart-card card border-0">
@@ -202,8 +202,8 @@ export default function App() {
   )
 }
 
-function ChartHeading({ eyebrow, title, text, source }) {
-  return <div className="section-intro"><div><p className="eyebrow">{eyebrow}</p><h2 id="line-chart-title">{title}</h2><p>{text}</p></div><span className="source-badge">{source}</span></div>
+function ChartHeading({ eyebrow, title, text }) {
+  return <div className="section-intro"><div><p className="eyebrow">{eyebrow}</p><h2 id="line-chart-title">{title}</h2><p>{text}</p></div></div>
 }
 
 function StatusCard({ title, children, loading = false }) {
