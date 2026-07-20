@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 import './App.css'
-import analyticsImage from './assets/case studies/analytics.png'
-import ecommerceImage from './assets/case studies/ecommerce.png'
-import memoryGameImage from './assets/case studies/memory-game.jpeg'
-import serviceSiteImage from './assets/case studies/physiotherapist-helping-patient-her-clinic.jpg'
+import analyticsImage from './assets/case studies/living-cost-logo.png'
+import ecommerceImage from './assets/case studies/thread-and-form-logo.png'
+import memoryGameImage from './assets/case studies/memory-master-logo.png'
+import serviceSiteImage from './assets/case studies/meridian-logo-colour.png'
 import webDevelopmentIcon from './assets/web-development.svg'
 import workflowIcon from './assets/workflow.svg'
 
@@ -126,7 +126,7 @@ function App() {
                 <img
                   className="card-img-top project-card-image"
                   src={serviceSiteImage}
-                  alt="Meridian Health Physiotherapy service website preview"
+                  alt="Meridian Health Physiotherapy logo"
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Service Site</h3>
@@ -148,7 +148,7 @@ function App() {
                 <img
                   className="card-img-top project-card-image"
                   src={memoryGameImage}
-                  alt="Memory game case study preview"
+                  alt="Memory Master logo"
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">Memory Game</h3>
@@ -167,7 +167,7 @@ function App() {
                 <img
                   className="card-img-top project-card-image"
                   src={ecommerceImage}
-                  alt="E-commerce site case study preview"
+                  alt="Thread and Form logo"
                 />
                 <div className="card-body d-flex flex-column">
                   <h3 className="h5 card-title fw-bold">E-commerce Site</h3>
@@ -186,12 +186,19 @@ function App() {
                 <img
                   className="card-img-top project-card-image"
                   src={analyticsImage}
-                  alt="Analytics site case study preview"
+                  alt="LivingCosts dashboard logo"
                 />
                 <div className="card-body d-flex flex-column">
-                  <h3 className="h5 card-title fw-bold">Analytics Site</h3>
-                  <p className="card-text text-secondary">A dashboard for viewing metrics and visual reports.</p>
-                  <button className="btn btn-outline-primary mt-auto" type="button">Coming Soon</button>
+                  <h3 className="h5 card-title fw-bold">Analytics Dashboard</h3>
+                  <p className="card-text text-secondary">A bilingual dashboard for exploring Canadian cost-of-living trends.</p>
+                  <a
+                    className="btn btn-outline-primary mt-auto"
+                    href="https://living-cost-canada.netlify.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Website
+                  </a>
                 </div>
               </div>
             </div>

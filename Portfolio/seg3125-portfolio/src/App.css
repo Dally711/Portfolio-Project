@@ -108,7 +108,9 @@
 
 .project-card-image {
   height: 165px;
-  object-fit: cover;
+  padding: 1.25rem;
+  background: #fff;
+  object-fit: contain;
 }
 
 .project-card .card-body {
