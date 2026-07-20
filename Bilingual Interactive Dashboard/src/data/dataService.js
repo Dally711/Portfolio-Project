@@ -36,6 +36,7 @@ export async function loadCsv(path) {
 export const loaders = {
   grocery: () => loadCsv('/data/grocery-prices.csv'),
   inflation: () => loadCsv('/data/inflation.csv'),
+  house: () => loadCsv('/data/housing.csv'),
   rent: () => loadCsv('/data/rent-data.csv'),
   gas: () => loadCsv('/data/gas.csv'),
 }

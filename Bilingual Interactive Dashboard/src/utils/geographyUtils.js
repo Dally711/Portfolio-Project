@@ -34,8 +34,3 @@ export function normalizeRegion(value) {
     return text === item || text.startsWith(`${item} `) || text.endsWith(` ${item}`) || text.includes(` ${item} `)
   })) ?? ''
 }
-
-export function getMapRegionName(properties = {}) {
-  const name = properties.PRNAME ?? properties.name ?? properties.NAME ?? ''
-  return normalizeRegion(String(name).split(' / ')[0])
-}

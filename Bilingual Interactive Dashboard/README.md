@@ -1,16 +1,41 @@
-# React + Vite
+# Bilingual Interactive Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A focused single-page React dashboard for SEG 3125 Assignment 5. It explores Canadian grocery prices, inflation, housing, rent, and gas prices through two required chart types.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install --legacy-peer-deps
+npm run dev
+```
 
-## React Compiler
+Create a production build with:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+```
 
-## Expanding the ESLint configuration
+## Main visualizations
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Line chart: explores a selected metric over time using geography, category, and date controls.
+- Horizontal bar chart: compares the selected metric across Canadian regions and supports sorting.
+
+## Local data
+
+The dashboard reads and caches these browser-side CSV files with Papa Parse:
+
+- `public/data/grocery-prices.csv`
+- `public/data/inflation.csv`
+- `public/data/housing.csv`
+- `public/data/rent-data.csv`
+- `public/data/gas.csv`
+
+No backend, live API, synthetic data, or placeholder chart values are used. Where an official Canada or province series is unavailable, the interface clearly describes its simple unweighted local average.
+
+## Technology
+
+- React and Vite
+- Bootstrap with custom CSS
+- Papa Parse
+- Chart.js and react-chartjs-2
+- Central English/French translation resources and `Intl` formatting
