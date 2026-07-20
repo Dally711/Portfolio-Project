@@ -26,7 +26,7 @@ https://thread-and-form.netlify.app/
 
 ## Analytics Website
 
-Coming Soon
+[living-cost-canada.netlify.app](https://living-cost-canada.netlify.app/)
 
 ---
 
@@ -190,11 +190,21 @@ The prototype supports the required shopping flow from product browsing to cart,
 
 ### Status
 
-Coming Soon
+Complete
 
 ### Overview
 
-Coming Soon
+An interactive bilingual dashboard for exploring Canadian grocery prices, inflation, housing, rent, and gas prices. It uses local Statistics Canada CSV datasets and provides configurable historical trends, regional comparisons, summary indicators, and English/French localization.
+
+### Technologies
+
+* React
+* Vite
+* JavaScript
+* Bootstrap
+* Papa Parse
+* Chart.js
+* react-chartjs-2
 
 ---
 
@@ -277,13 +287,13 @@ Through these projects, I have gained experience in:
 
 # Project Status
 
-| Project                               | Status      |
-| ------------------------------------- | ----------- |
-| Portfolio Website                     | Complete    |
-| Meridian Health Physiotherapy Website | Complete    |
-| Memory Game                           | In Progress |
-| E-Commerce Website                    | Complete    |
-| Analytics Website                     | Coming Soon |
+| Project                               | Status                                             |
+| ------------------------------------- | -------------------------------------------------- |
+| Portfolio Website                     | Complete                                           |
+| Meridian Health Physiotherapy Website | Complete                                           |
+| Memory Game                           | In Progress                                        |
+| E-Commerce Website                    | Complete                                           |
+| Analytics Website                     | [Complete](https://living-cost-canada.netlify.app/) |
 
 ---
 

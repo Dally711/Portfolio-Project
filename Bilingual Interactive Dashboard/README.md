@@ -2,6 +2,10 @@
 
 A focused single-page React dashboard for exploring Canadian grocery prices, inflation, housing, rent, and gas prices through interactive visualizations.
 
+## Live website
+
+[living-cost-canada.netlify.app](https://living-cost-canada.netlify.app/)
+
 ## Run locally
 
 ```bash
